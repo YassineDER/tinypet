@@ -5,8 +5,8 @@
   <packaging>war</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <groupId>com.example.appengine</groupId>
-  <artifactId>echo-j8</artifactId>
+  <groupId>com.example.echo</groupId>
+  <artifactId>tinypet</artifactId>
 
   <!--
     The parent pom defines common style checks and testing strategies for our samples.
@@ -19,8 +19,8 @@
   </parent>
 
   <properties>
-    <maven.compiler.target>1.8</maven.compiler.target>
-    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
 
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
