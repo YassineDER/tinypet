@@ -9,13 +9,13 @@ env_variables:
   'ENDPOINTS_SERVICE_NAME': 'tinypet-404519.appspot.com'
 handlers:
 - url: (/.*/)
-  static_files: __static__\1index.html
+  static_files: __static__\1app/index.html
   upload: __NOT_USED__
   require_matching_file: True
   login: optional
   secure: optional
 - url: (/)
-  static_files: __static__\1index.html
+  static_files: __static__\1app/index.html
   upload: __NOT_USED__
   require_matching_file: True
   login: optional

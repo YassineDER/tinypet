@@ -67,7 +67,7 @@
     </web-resource-collection>
   </security-constraint>
   <welcome-file-list>
-    <welcome-file>index.html</welcome-file>
+    <welcome-file>app/index.html</welcome-file>
   </welcome-file-list>
   <locale-encoding-mapping-list>
     <locale-encoding-mapping origin="DefaultsDescriptor(file:///C:/Users/Hp/AppData/Local/Google/ct4j-cloud-sdk/LATEST/google-cloud-sdk/platform/google_appengine/google/appengine/tools/java/docs/webdefault.xml):9">

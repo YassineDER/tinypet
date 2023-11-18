@@ -1,0 +1,6 @@
+.env
+.git
+.gitignore
+.gcloudignore
+README.md
+/node_modules
