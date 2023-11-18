@@ -9,9 +9,5 @@ set -e
 # Command to clean and package your project
 mvn clean install
 
-# Generate API
-mvn endpoints-framework:openApiDocs
-gcloud endpoints services deploy target/openapi-docs/openapi.json
-
 # Command to deploy
 mvn appengine:run
