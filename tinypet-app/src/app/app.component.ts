@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { HomeComponent } from './components/home/home.component';
 declare var $: any; // jQuery
 
 @Component({

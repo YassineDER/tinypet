@@ -1,0 +1,74 @@
+#banner {
+    background-image: url("/assets/images/manifestation.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 60vh;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+}
+
+.overlay {
+    background-color: rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    z-index: -1;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.overlay h1 {
+    color: white;
+    width: 75%;
+    text-align: center;
+    line-height: 2;
+}
+
+.overlay h1 span {
+    background-color: #8C8DFF;
+    padding: 0 7px;
+    border-radius: 3px;
+}
+
+.title {
+    color: #1E1A59;
+    text-align: center;
+    margin-top: 0;
+}
+
+.subtitle {
+    color: #8C8DFF;
+    text-align: center;
+    font-size: 1.5rem;
+}
+
+.twelve.wide.column div{
+    text-align: center;
+    .ui.button {
+        background-color: #1E1A59;
+        color: white;
+    }
+}
+.ui.progress{
+    margin-bottom: .7rem;
+}
+.header{
+    margin-bottom: .6rem;
+}
+.description{
+    text-align: left !important;
+}
+.extra.content span{
+    color: #8C8DFF;
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+

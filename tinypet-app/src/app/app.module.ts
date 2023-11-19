@@ -19,6 +19,7 @@ import { PetitionsListComponent } from './components/petitions-list/petitions-li
   imports: [
     BrowserModule,
     AppRoutingModule,
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
