@@ -1,0 +1,9 @@
+a.item, .item i {
+    font-size: 18px;
+    color: #1E1A59 !important;
+}
+
+a.item.active {
+    color: #8C8DFF !important;
+}
+

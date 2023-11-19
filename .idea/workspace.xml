@@ -5,33 +5,20 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ca27551b-6796-47e0-9bb4-0493f6daaeb9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gcloudignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.bat" beforeDir="false" afterPath="$PROJECT_DIR$/run.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/run.sh" beforeDir="false" afterPath="$PROJECT_DIR$/run.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/echo/Echo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/Echo.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/webapp/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/appengine-generated/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/appengine-generated/app.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/classes/com/example/echo/Echo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/classes/com/example/echo/Echo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/min-quickstart-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/min-quickstart-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/quickstart-web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/quickstart-web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/__static__/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/app.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/target/appengine-staging/app.yaml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/appengine-staging/index.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT.war" beforeDir="false" afterPath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT.war" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT/WEB-INF/classes/com/example/echo/Echo.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT/WEB-INF/classes/com/example/echo/Echo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT/WEB-INF/web.xml" beforeDir="false" afterPath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT/WEB-INF/web.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/target/tinypet-1.0-SNAPSHOT/index.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tinypet-app/angular.json" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/angular.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tinypet-app/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tinypet-app/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tinypet-app/src/app/app.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/src/app/app.component.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="EditorConfigPreviewManager">
+    <editorConfig file="$PROJECT_DIR$/tinypet-app/.editorconfig" previewFile="$PROJECT_DIR$/tinypet-app/angular.json" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -159,7 +146,7 @@
       <workItem from="1700249904987" duration="528000" />
       <workItem from="1700250507512" duration="8636000" />
       <workItem from="1700322541897" duration="719000" />
-      <workItem from="1700327463928" duration="5339000" />
+      <workItem from="1700327463928" duration="7138000" />
     </task>
     <servers />
   </component>

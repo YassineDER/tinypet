@@ -4,6 +4,9 @@ build/
 
 # IntelliJ IDEA
 .idea/
+*.iws
+*.iml
+*.ipr
 
 # Visual Studio Code
 .vscode/
@@ -24,3 +27,4 @@ tmp/
 node_modules/
 dist/
 
+set_vars.cmd
