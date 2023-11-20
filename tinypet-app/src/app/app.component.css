@@ -1,10 +1,14 @@
-a.item, .item i {
+.menu a.item,.menu .item i {
     font-size: 18px;
     color: #1E1A59 !important;
 }
 
 a.item.active {
     color: #8C8DFF !important;
+}
+
+.footer {
+    background-color: #e3e4ff !important;
 }
   
 
