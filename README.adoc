@@ -9,6 +9,7 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
 * Google Cloud SDK (gcloud) installed, authenticated, and configured with your project.
 * Necessary APIs enabled in the Google Cloud Console.
 * Relevant gcloud services and components installed on your local machine.
+* Angular CLI installed (Angular v17).
 
 == Configuration Steps
 
@@ -19,25 +20,6 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
   - Make sure all required APIs are enabled in your Google Cloud Console.
   - Install any additional required gcloud components.
 
-These commands requires Angular CLI to be installed, check <<setup-angular,Setting Up Angular Application>> before Running / Deploying using provided commands.
-
-== Running the Application
-
-. *Locally*:
-  - For Windows, use `run.bat`.
-  - For Unix-based systems, use `run.sh`.
-
-== Deploying the Application
-
-. *To Google App Engine*:
-  - For Windows, use `deploy.bat`.
-  - For Unix-based systems, use `deploy.sh`.
-
-== Important Notes
-- Ensure Java 17 is used, as the project is not compatible with Java 8.
-- Failure to follow these instructions may result in the application not working correctly.
-
-[[setup-angular]]
 == Setting Up Angular Application
 
 To run the Angular application located in the `tinypet-app` directory, you need to have Angular CLI installed.
@@ -53,6 +35,23 @@ To run the Angular application located in the `tinypet-app` directory, you need 
     `npm install`
     `ng serve`
   - The Angular application will be served on `http://localhost:4200` by default.
+
+
+== Running the Application
+
+. *Locally*:
+  - For Windows, use `run.bat`
+  - For Unix-based systems, use `run.sh`
+
+== Deploying the Application
+
+. *To Google App Engine*:
+  - For Windows, use `deploy.bat`
+  - For Unix-based systems, use `deploy.sh`
+
+== Important Notes
+- Ensure Java 17 is used, as the project is not compatible with Java 8.
+- Failure to follow these instructions may result in the application not working correctly.
 
 
 == Additional Recommendations
