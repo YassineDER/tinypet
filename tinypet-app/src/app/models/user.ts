@@ -4,9 +4,8 @@ export interface User {
     id: number;
     name: string;
     image: string;
-    registeredDate: Date;
     email: string;
-    password: string;
+    registeredDate: Date;
     signedPetitions: Petition[];
     createdPetitions: Petition[];
 }

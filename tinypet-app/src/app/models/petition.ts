@@ -1,4 +1,4 @@
-import { Comments } from "./comments";
+import { Comment } from "./comments";
 import { Tag } from "./tag";
 import { User } from "./user";
 
@@ -12,5 +12,5 @@ export interface Petition {
     signatureCount: number;
     signatureGoal: number;
     author: User;
-    comments: Comments[];
+    comments: Comment[];
 }
