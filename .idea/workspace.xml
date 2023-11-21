@@ -4,22 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ca27551b-6796-47e0-9bb4-0493f6daaeb9" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/exceptions/CannotEditCommentException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/exceptions/CannotSignPetitionException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/models/Comment.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/models/Petition.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/models/Tag.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/echo/models/User.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/echo/CorsFilter.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinypet-app/src/app/models/comments.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/src/app/models/comments.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinypet-app/src/app/models/petition.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/src/app/models/petition.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinypet-app/src/app/models/tag.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/src/app/models/tag.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tinypet-app/src/app/models/user.ts" beforeDir="false" afterPath="$PROJECT_DIR$/tinypet-app/src/app/models/user.ts" afterDir="false" />
-    </list>
+    <list default="true" id="ca27551b-6796-47e0-9bb4-0493f6daaeb9" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -147,6 +132,7 @@
       <workItem from="1700322541897" duration="719000" />
       <workItem from="1700327463928" duration="7138000" />
       <workItem from="1700495052464" duration="6215000" />
+      <workItem from="1700557142278" duration="310000" />
     </task>
     <servers />
   </component>
