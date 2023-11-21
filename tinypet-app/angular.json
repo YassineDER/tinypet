@@ -50,9 +50,13 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/fomantic-ui/dist/semantic.min.css",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.min.js",
+              "node_modules/fomantic-ui/dist/semantic.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -85,10 +89,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "tinypet-app:build:production"
+              "buildTarget": "tinypet-app:build:production"
             },
             "development": {
-              "browserTarget": "tinypet-app:build:development"
+              "buildTarget": "tinypet-app:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -96,25 +100,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "tinypet-app:build"
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "polyfills": [
-              "zone.js",
-              "zone.js/testing"
-            ],
-            "tsConfig": "tsconfig.spec.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets"
-            ],
-            "styles": [
-              "src/styles.css"
-            ],
-            "scripts": []
+            "buildTarget": "tinypet-app:build"
           }
         }
       }

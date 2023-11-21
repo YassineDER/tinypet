@@ -1,1 +1,8 @@
-/* You can add global styles to this file, and also import other style files */
+/* Roboto */
+@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+
+* {
+    font-family: 'Roboto', sans-serif;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}

@@ -1,0 +1,83 @@
+<div class="ui container" id="banner">
+    <div class="overlay">
+        <h1>Nous permettons au plus grand nombre de citoyens d'être entendus dans leur combat, jusqu'à la
+            <span>victoire</span>, pour plus de démocratie et de solidarité.
+        </h1>
+        <br>
+        <h3> Deja 92 {{count}} signatures des citoyens engagés</h3>
+        <br>
+        <button class="ui inverted big button">
+            Lancez votre pétition
+        </button>
+    </div>
+</div>
+<br>
+
+<div class="ui grid centered">
+    <div class="twelve wide column">
+        <h3 class="subtitle">- VICTOIRES -</h3>
+        <h1 class="title">Pétitions réussies</h1>
+
+        <div class="ui three column grid">
+            <div class="column" *ngFor="let victory of victories">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="/assets/images/Logo.png">
+                    </div>
+                    <div class="content">
+                        <a class="header">NON A LA FERMETURE D'UNE CLASSE</a>
+                        <div class="meta">
+                            <span class="date"><i class="user icon"></i>Tanguy Arnaud </span>
+                        </div>
+                        <div class="description">
+                            Signez cette pétition pour demander à la justice française de ne pas abandonner Tiphaine !
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span>{{victory}}</span> signatures
+                    </div>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <button class="ui big button">Voir toutes les victoires</button>
+        </div>
+    </div>
+</div>
+<br>
+
+<div class="ui divider"></div>
+<br>
+<div class="ui grid centered">
+    <div class="twelve wide column">
+        <h3 class="subtitle">- PETITIONS -</h3>
+        <h1 class="title">Récemment lancées</h1>
+        <div class="ui three column grid">
+            <div class="column" *ngFor="let victory of victories">
+                <div class="ui card">
+                    <div class="image">
+                        <img src="/assets/images/Logo.png">
+                    </div>
+                    <div class="content">
+                        <a class="header">JUSTICE POUR TIPHAINE VERON !</a>
+                        <div class="meta">
+                            <span class="date"><i class="user icon"></i>Tanguy Arnaud</span>
+                        </div>
+                        <div class="description">
+                            Signez cette pétition pour demander à la justice française de ne pas abandonner Tiphaine !
+                        </div>
+                    </div>
+                    <div class="extra content">
+                        <span>{{victory}}</span> signatures
+                    </div>
+                    <button class="ui blue button">Je signe</button>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div>
+            <button class="ui big button">Parcourir les petitions</button>
+        </div>
+    </div>
+</div>
