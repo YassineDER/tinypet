@@ -1,3 +1,8 @@
-C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\CorsFilter.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\models\Comment.java
 C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\Employee.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\exceptions\CannotEditCommentException.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\models\Petition.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\models\Tag.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\exceptions\CannotSignPetitionException.java
+C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\models\User.java
 C:\Users\Hp\Desktop\Univ\Nantes\Cloud\tinypet\src\main\java\com\example\echo\Echo.java
