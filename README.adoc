@@ -40,22 +40,15 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
 To run the Angular application located in the `tinypet-app` directory, you need to have Angular CLI installed.
 
 . *Install Angular CLI*:
-  - Angular CLI is required to run and build Angular projects. To install Angular CLI, run the following command:
-    [source,bash]
-    ----
-    npm install -g @angular/cli
-    ----
+  - Angular CLI is required to run and build Angular projects. To install Angular CLI, run the following command: `npm install -g @angular/cli`
   - This will install Angular CLI globally on your system.
 
 . *Running the Angular App*:
   - Navigate to the `tinypet-app` directory.
   - Run the following commands to install dependencies and start the application:
-    [source,bash]
-    ----
-    cd tinypet-app
-    npm install
-    ng serve
-    ----
+    `cd tinypet-app`
+    `npm install`
+    `ng serve`
   - The Angular application will be served on `http://localhost:4200` by default.
 
 
