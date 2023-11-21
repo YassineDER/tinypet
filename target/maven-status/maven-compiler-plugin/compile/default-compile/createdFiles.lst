@@ -1,8 +1,0 @@
-com\example\echo\exceptions\CannotEditCommentException.class
-com\example\echo\models\User.class
-com\example\echo\exceptions\CannotSignPetitionException.class
-com\example\echo\models\Tag.class
-com\example\echo\models\Comment.class
-com\example\echo\models\Petition.class
-com\example\echo\Echo.class
-com\example\echo\Employee.class
