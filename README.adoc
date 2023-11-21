@@ -35,6 +35,32 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
 - Ensure Java 17 is used, as the project is not compatible with Java 8.
 - Failure to follow these instructions may result in the application not working correctly.
 
+== Setting Up Angular Application
+
+To run the Angular application located in the `tinypet-app` directory, you need to have Angular CLI installed.
+
+. *Install Angular CLI*:
+  - Angular CLI is required to run and build Angular projects. To install Angular CLI, run the following command:
+    [source,bash]
+    ----
+    npm install -g @angular/cli
+    ----
+  - This will install Angular CLI globally on your system.
+
+. *Running the Angular App*:
+  - Navigate to the `tinypet-app` directory.
+  - Run the following commands to install dependencies and start the application:
+    [source,bash]
+    ----
+    cd tinypet-app
+    npm install
+    ng serve
+    ----
+  - The Angular application will be served on `http://localhost:4200` by default.
+
+
 == Additional Recommendations
 - Regularly update your Google Cloud SDK.
 - Frequently check for the latest updates and patches for Java 17.
+- Ensure you have Node.js and npm installed as they are prerequisites for Angular CLI.
+- If you encounter any issues, check the version compatibility between your Angular project and the Angular CLI version.
