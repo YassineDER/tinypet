@@ -19,6 +19,8 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
   - Make sure all required APIs are enabled in your Google Cloud Console.
   - Install any additional required gcloud components.
 
+These commands requires Angular CLI to be installed, check <<setup-angular,Setting Up Angular Application>> before Running / Deploying using provided commands.
+
 == Running the Application
 
 . *Locally*:
@@ -35,6 +37,7 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
 - Ensure Java 17 is used, as the project is not compatible with Java 8.
 - Failure to follow these instructions may result in the application not working correctly.
 
+[[setup-angular]]
 == Setting Up Angular Application
 
 To run the Angular application located in the `tinypet-app` directory, you need to have Angular CLI installed.
