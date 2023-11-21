@@ -38,7 +38,8 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "../src/main/webapp/app/",
+            "outputPath": "../src/main/webapp/",
+              "deleteOutputPath": false,
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": [

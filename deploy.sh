@@ -20,5 +20,10 @@ popd
 # Clean and package your project
 mvn clean install
 
+# Generate API
+mvn endpoints-framework:openApiDocs
+
+gcloud endpoints services deploy target/openapi-docs/openapi.json
+
 # Deploy
-mvn appengine:run
+mvn appengine:deploy
