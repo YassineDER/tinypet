@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="left menu">
         <a routerLink="/" class="item">
-            <img class="ui image tiny" src="/assets/images/Logo.png" alt="logo">
+            <img class="ui image tiny" ngSrc="/assets/images/Logo.png" alt="logo" height="216" width="250">
         </a>
     </div>
 
@@ -14,14 +14,21 @@
 
     <!-- login -->
     <div class="right menu">
-        <div class="ui top item left simple dropdown">
-            <i class="user icon"></i>
+        <div class="ui top item left simple dropdown" (click)="printUser()">
+            <i *ngIf="!loggedIn && !user" class="user icon"></i>
+            <img *ngIf="loggedIn && user" width="80" height="80" class="ui avatar image" ngSrc="{{user.photoUrl}}" alt="user photo">
             <div class="menu">
-                <a routerLink="/login" class="item">Se connecter</a>
+                <asl-google-signin-button  shape="rectangular" type="standard" *ngIf="!loggedIn && !user" type='icon' class='item' size='large'></asl-google-signin-button>
+                <div *ngIf="loggedIn && user" class="item">
+					<div class="ui top attached label large">{{user.name}}</div>
+                </div>
                 <div class="ui divider"></div>
-                <a routerLink="/settings" class="item">Parametres</a>
-                <a routerLink="/logout" class="item">Se deconnecter</a>
-                <a routerLink="/help" class="item">Aide</a>
+                <a routerLink="/settings" class="item">
+                    <i class="settings icon"></i>Parametres</a>
+                <a *ngIf="loggedIn && user" (click)="logout()" class="item">
+                    <i class="sign out icon"></i>Se deconnecter</a>
+                <a routerLink="/help" class="item">
+                    <i class="help icon"></i>Aide</a>
             </div>
         </div>
     </div>
@@ -31,7 +38,7 @@
 <router-outlet></router-outlet>
 
 <br>
-<!-- Footer-->>
+<!-- Footer-->
 <div class="ui vertical footer segment">
     <div class="ui center aligned container">
         <div class="ui stackable divided grid">
@@ -55,7 +62,7 @@
                 </div>
             </div>
             <div class="eight wide column">
-                <img src="/assets/images/Logo.png" class="ui centered small image">
+                <img ngSrc="/assets/images/Logo.png" class="ui centered small image" height="216" width="250" alt="">
                 <p>
                     <i>“La démocratie est le gouvernement du peuple, par le peuple, pour le peuple.”</i>
                     <br>
