@@ -9,7 +9,9 @@ import { CreatePetitionComponent } from './components/create-petition/create-pet
 import { MyPetitionsComponent } from './components/my-petitions/my-petitions.component';
 import { PetitionsListComponent } from './components/petitions-list/petitions-list.component';
 import {NgOptimizedImage} from "@angular/common";
-import {HttpClient} from "@angular/common/http";
+import {environment} from "../environments/environment";
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import {HttpClient} from "@angular/common/http";
     PetitionsListComponent,
   ],
     imports: [
+        HttpClientModule,
         BrowserModule,
         AppRoutingModule,
         NgOptimizedImage,
         SocialLoginModule,
         GoogleSigninButtonModule,
+        BrowserAnimationsModule,
     ],
   providers: [{
       provide: 'SocialAuthServiceConfig',
@@ -32,7 +36,7 @@ import {HttpClient} from "@angular/common/http";
           autoLogin: true,
           providers: [{
                   id: GoogleLoginProvider.PROVIDER_ID,
-                  provider: new GoogleLoginProvider('527092413767-a12gm70hgua8ers9ommcuqk77919ci4j.apps.googleusercontent.com')}
+                  provider: new GoogleLoginProvider(environment.googleClientId)}
           ],
           onError: (err: any) => console.error(err)
       } as SocialAuthServiceConfig,

@@ -1,5 +1,8 @@
 import {Component, OnInit} from '@angular/core';
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
+import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {UserService} from "./services/user.service";
+import {User} from "./models/user";
 
 declare var $: any; // jQuery
 
@@ -8,39 +11,55 @@ declare var $: any; // jQuery
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-export class AppComponent implements OnInit {
-    user: SocialUser | undefined;
-    loggedIn: boolean | undefined;
-    accessToken = '';
-    title = 'tinypet-app';
 
-    constructor(private socialAuthService: SocialAuthService) {
-    }
+export class AppComponent implements OnInit {
+    user: User | undefined;
+    accessToken = '';
+
+    constructor(private authService: SocialAuthService, private _snackBar: MatSnackBar, private userService :UserService) {}
 
     ngOnInit() {
-        this.socialAuthService.authState.subscribe((user) => {
-            this.user = user;
-            this.loggedIn = (user != null);
-        });
-    }
-
-    logout() {
-        this.socialAuthService.signOut().then(r => {
-            this.user = undefined;
-            this.loggedIn = false;
-            this.accessToken = '';
+        // check if auth was successful
+        this.authService.authState.subscribe({
+            next: (user) => {
+                let U = this.userService.convertSocialToUser(user);
+                this.userService.saveOrGetUser(U).subscribe({
+                    next: (response) => this.user = this.userService.convertEntityToUser(response),
+                    error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK')
+                })
+            }, error: (error) => {
+                console.error(error)
+                this._snackBar.open('Authentication Error: ' + error.message, 'OK')
+            }
         })
     }
 
+    logout() {
+        this.authService.signOut().then(r => {
+            this.user = undefined;
+            this.accessToken = '';
+        }).catch(e => this._snackBar.open('Cannot logout: ' + e.message, 'OK', {
+            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
+        }))
+
+    }
+
+    // these are sensitive, to be secured
     getAccessToken(): void {
-        this.socialAuthService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.accessToken = accessToken);
+        this.authService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.accessToken = accessToken)
+            .catch(e => this._snackBar.open('Cannot get access token: ' + e.message, 'OK', {
+                duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
+            }))
     }
 
     refreshToken(): void {
-        this.socialAuthService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID);
+        this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).catch(e => this._snackBar.open('Cannot refresh token: ' + e.message, 'OK', {
+            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
+        }))
     }
 
+    // to be removed in production
     printUser(): void {
-        console.log(this.user);
+        console.log(this.user)
     }
 }

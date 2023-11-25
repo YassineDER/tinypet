@@ -1,12 +1,16 @@
 package com.example.echo.models;
 
 import com.example.echo.exceptions.CannotEditCommentException;
+import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonFormat;
+import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Date;
 
+@JsonPropertyOrder({"id", "content", "createdDate", "author"})
 public class Comment {
     Long id;
     String content;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE MMM dd HH:mm:ss zzz yyyy")
     Date createdDate;
     User author;
 

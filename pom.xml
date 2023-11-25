@@ -86,6 +86,7 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.5.0</version>
         <configuration>
+          <port>8083</port>
           <projectId>GCLOUD_CONFIG</projectId>
           <version>GCLOUD_CONFIG</version>
         </configuration>

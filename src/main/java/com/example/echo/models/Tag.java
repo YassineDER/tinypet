@@ -1,5 +1,8 @@
 package com.example.echo.models;
 
+import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonPropertyOrder;
+
+@JsonPropertyOrder("name")
 public class Tag {
     String name;
 
