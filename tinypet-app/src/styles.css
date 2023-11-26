@@ -1,8 +1,14 @@
-/* Roboto */
-@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');
+/*@import url('https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900&display=swap');*/
+@font-face {
+    font-family: 'GT Walsheim';
+    src: url('/assets/fonts/GT Walsheim Regular.ttf') format('truetype');
+}
 
 * {
-    font-family: 'Roboto', sans-serif;
+    font-family: 'GT Walsheim', sans-serif;
     -webkit-text-size-adjust: 100%;
     -ms-text-size-adjust: 100%;
 }
+
+html, body { height: 100%; }
+body { margin: 0; }

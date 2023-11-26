@@ -1,15 +1,19 @@
 package com.example.echo.models;
 
 import com.example.echo.exceptions.CannotSignPetitionException;
+import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonFormat;
+import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import java.util.Date;
 import java.util.List;
 
+@JsonPropertyOrder({"id", "title", "description", "image", "creationDate", "tags", "signatureCount", "signatureGoal", "author", "comments"})
 public class Petition {
     Long id;
     String title;
     String description;
     String image;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE MMM dd HH:mm:ss zzz yyyy")
     Date creationDate;
     List<Tag> tags;
     Integer signatureCount;

@@ -1,7 +1,7 @@
 import { Petition } from "./petition";
 
 export interface User {
-    id: number;
+    id: string;
     name: string;
     image: string;
     email: string;
