@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {UserService} from "./services/user.service";
 import {User} from "./models/user";
@@ -13,9 +13,7 @@ declare var $: any; // jQuery
 })
 
 export class AppComponent implements OnInit {
-    user: User | undefined;
-    isLoading = true;
-    accessToken = '';
+    user?: User;
 
     constructor(private authService: SocialAuthService,
                 private _snackBar: MatSnackBar,
@@ -23,53 +21,44 @@ export class AppComponent implements OnInit {
 
 
     ngOnInit() {
-        // check if auth was successful
-        this.authService.authState.subscribe({
-            next: (user) => {
-                let U = this.userService.convertSocialToUser(user);
-                this.userService.saveOrGetUser(U).subscribe({
-                    next: (response) => {
-                        this.user = this.userService.convertEntityToUser(response)
-                        this.isLoading = false;
-                    },
-                    error: (error) => {
-                        this._snackBar.open('Request Error: ' + error.message, 'OK')
-                        this.isLoading = false;
-                    }
-                })
-            }, error: (error) => {
-                this.isLoading = false;
-                this._snackBar.open('Authentication Error: ' + error.message, 'OK')
-            }
-        })
+        // Check if user is already authenticated by looking for a stored token
+        const storedToken = localStorage.getItem('authToken');
+
+        if (storedToken) {
+            this.userService.validateTokenAndCreateSession(storedToken).subscribe({
+                next: (user) => this.user = this.userService.convertEntityToUser(user),
+                error: (error) => {
+                    this.logout(); // Logout user and remove token from storage
+                    this.subscribeToAuthState(); // Subscribe to authState for new login
+                }
+            });
+        } else {
+            this.subscribeToAuthState();
+        }
     }
+
+    private subscribeToAuthState() {
+        this.authService.authState.subscribe({
+            next: (s_user) => {
+                if (s_user) {
+                    localStorage.setItem('authToken', s_user.idToken);
+                    this.userService.validateTokenAndCreateSession(s_user.idToken).subscribe({
+                        next: (user) => this.user = this.userService.convertEntityToUser(user),
+                        error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK')
+                    });
+                }
+            }, error: (error) => this._snackBar.open('Authentication Error: ' + error.message, 'OK')
+        });
+    }
+
 
     logout() {
-        this.authService.signOut().then(r => {
-            this.user = undefined;
-            this.accessToken = '';
-        }).catch(e => this._snackBar.open('Cannot logout: ' + e.message, 'OK', {
-            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-        }))
-
+        this.user = undefined;
+        localStorage.removeItem('authToken'); // Remove token from storage
     }
 
-    // these are sensitive, to be secured
-    getAccessToken(): void {
-        this.authService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.accessToken = accessToken)
-            .catch(e => this._snackBar.open('Cannot get access token: ' + e.message, 'OK', {
-                duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-            }))
-    }
-
-    refreshToken(): void {
-        this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).catch(e => this._snackBar.open('Cannot refresh token: ' + e.message, 'OK', {
-            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-        }))
-    }
 
     // to be removed in production
-    printUser(): void {
-        console.log(this.user)
+    testTask() {
     }
 }

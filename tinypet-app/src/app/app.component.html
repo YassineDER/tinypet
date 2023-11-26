@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="left menu">
         <a routerLink="/" class="item">
-            <img class="ui image tiny" ngSrc="/assets/images/Logo.png" alt="logo" height="216" width="250">
+            <img class="ui image tiny" src="/assets/images/Logo.png" alt="logo" height="216" width="250">
         </a>
     </div>
 
@@ -11,17 +11,13 @@
     <a class="item" routerLink="create" routerLinkActive="active">Lancer une petition</a>
     <a class="item" routerLink="mypetitions" routerLinkActive="active">Mes petitions</a>
     <a class="item" routerLink="petitions" routerLinkActive="active">Liste des petitions</a>
-    <div class="item" id="item" (click)="printUser()">
-        Testing task
-    </div>
+    <div class="item" id="item" (click)="testTask()">Testing task</div>
 
     <!-- login -->
     <div class="right menu">
         <div class="ui top item left simple dropdown">
-            <div *ngIf="isLoading" class="ui active blue elastic loader"></div>
-            <i *ngIf="!isLoading && !user" class="user icon"></i>
-            <img *ngIf="user" width="80" height="80" class="ui avatar image" ngSrc="{{user.image}}" alt="user photo">
-
+            <img *ngIf="user"  width="80" height="80" class="ui avatar image" src="{{user.image}}" alt='user'>
+            <i *ngIf="!user" class="icon user"></i>
             <div class="menu">
                 <asl-google-signin-button type="standard" *ngIf="!user" type='icon' class='item'></asl-google-signin-button>
                 <div *ngIf="user" class="item ui header large">{{user.name}}</div>
@@ -65,7 +61,7 @@
                 </div>
             </div>
             <div class="eight wide column">
-                <img ngSrc="/assets/images/Logo.png" class="ui centered small image" height="216" width="250" alt="">
+                <img src="/assets/images/Logo.png" class="ui centered small image" height="216" width="250" alt="Big logo">
                 <p>
                     <i>“La démocratie est le gouvernement du peuple, par le peuple, pour le peuple.”</i>
                     <br>

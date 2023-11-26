@@ -10,5 +10,10 @@ a.item.active {
 .footer {
     background-color: #e3e4ff !important;
 }
-  
+
+.item:has(.ui.loader){
+    width: 70px !important;
+}
+
+
 

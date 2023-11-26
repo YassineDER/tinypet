@@ -17,7 +17,12 @@ export class UserService {
         return this.http.post<User>(this.API + '/add', user);
     }
 
+    validateTokenAndCreateSession(token: string): Observable<User> {
+        return this.http.post<User>(this.API + '/validate-token', {token});
+    }
+
     convertSocialToUser(socialUser: SocialUser) {
+        if (!socialUser) return undefined;
         let U: User = {
             id: socialUser.id,
             name: socialUser.name,

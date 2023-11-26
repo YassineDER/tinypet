@@ -9,7 +9,7 @@ import com.google.api.server.spi.config.ApiMethod;
 public class PetitionApiService {
 
     @ApiMethod(name = "addPetition", path = "create", httpMethod = ApiMethod.HttpMethod.POST)
-    public void createPetition(User author, Petition petition) {
+    public void createPetition(Petition petition) {
 
     }
 }

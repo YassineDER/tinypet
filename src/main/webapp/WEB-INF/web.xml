@@ -26,14 +26,24 @@
         <welcome-file-list>
             <welcome-file>index.html</welcome-file>
         </welcome-file-list>
+
     <!-- [START api_management] -->
-    <!-- Add a filter that fetches the service config from service management. -->
+    <!-- Your Global Exception Filter -->
+    <filter>
+        <filter-name>globalExceptionFilter</filter-name>
+        <filter-class>com.example.echo.exceptions.GlobalExceptionFilter</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>globalExceptionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- Existing Endpoints Filters -->
     <filter>
         <filter-name>endpoints-api-configuration</filter-name>
         <filter-class>com.google.api.control.ServiceManagementConfigFilter</filter-class>
     </filter>
-
-    <!-- Add a filter that performs Endpoints logging and monitoring. -->
     <filter>
         <filter-name>endpoints-api-controller</filter-name>
         <filter-class>com.google.api.control.extensions.appengine.GoogleAppEngineControlFilter</filter-class>
@@ -51,10 +61,10 @@
         <filter-name>endpoints-api-configuration</filter-name>
         <servlet-name>EndpointsServlet</servlet-name>
     </filter-mapping>
-
     <filter-mapping>
         <filter-name>endpoints-api-controller</filter-name>
         <servlet-name>EndpointsServlet</servlet-name>
     </filter-mapping>
+
     <!-- [END api_management] -->
 </web-app>

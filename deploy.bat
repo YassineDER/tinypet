@@ -29,7 +29,7 @@ REM Generate API
 call mvn endpoints-framework:openApiDocs
 if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
 
-call gcloud endpoints services deploy target/openapi-docs/openapi.json
+call gcloud endpoints services deploy target\openapi-docs\openapi.json
 if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
 
 REM Deploy
