@@ -19,6 +19,10 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
   - Make sure all required APIs are enabled in your Google Cloud Console.
   - Install any additional required gcloud components.
 
+. *Installing Required Npm Dependencies*:
+  - run `npm i` inside the tinypey-app folder to install all required dependencies for the building.
+  - For maven dependencies, no need as the commands bellow do the work.
+
 == Running the Application
 
 . *Locally*:
@@ -32,9 +36,8 @@ This guide outlines the necessary steps to run and deploy the application. Pleas
   - For Unix-based systems, use `deploy.sh`.
 
 == Important Notes
-- Ensure Java 17 is used, as the project is not compatible with Java 8.
+- Ensure Java 17 is used, as the project is not compatible with Java 8 or neither Java 11.
 - Failure to follow these instructions may result in the application not working correctly.
 
 == Additional Recommendations
 - Regularly update your Google Cloud SDK.
-- Frequently check for the latest updates and patches for Java 17.
