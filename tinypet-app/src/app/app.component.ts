@@ -14,9 +14,13 @@ declare var $: any; // jQuery
 
 export class AppComponent implements OnInit {
     user: User | undefined;
+    isLoading = true;
     accessToken = '';
 
-    constructor(private authService: SocialAuthService, private _snackBar: MatSnackBar, private userService :UserService) {}
+    constructor(private authService: SocialAuthService,
+                private _snackBar: MatSnackBar,
+                private userService :UserService) {}
+
 
     ngOnInit() {
         // check if auth was successful
@@ -24,11 +28,17 @@ export class AppComponent implements OnInit {
             next: (user) => {
                 let U = this.userService.convertSocialToUser(user);
                 this.userService.saveOrGetUser(U).subscribe({
-                    next: (response) => this.user = this.userService.convertEntityToUser(response),
-                    error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK')
+                    next: (response) => {
+                        this.user = this.userService.convertEntityToUser(response)
+                        this.isLoading = false;
+                    },
+                    error: (error) => {
+                        this._snackBar.open('Request Error: ' + error.message, 'OK')
+                        this.isLoading = false;
+                    }
                 })
             }, error: (error) => {
-                console.error(error)
+                this.isLoading = false;
                 this._snackBar.open('Authentication Error: ' + error.message, 'OK')
             }
         })

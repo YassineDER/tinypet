@@ -18,10 +18,12 @@
     <!-- login -->
     <div class="right menu">
         <div class="ui top item left simple dropdown">
-            <i *ngIf="!user" class="user icon"></i>
+            <div *ngIf="isLoading" class="ui active blue elastic loader"></div>
+            <i *ngIf="!isLoading && !user" class="user icon"></i>
             <img *ngIf="user" width="80" height="80" class="ui avatar image" ngSrc="{{user.image}}" alt="user photo">
+
             <div class="menu">
-                <asl-google-signin-button shape="rectangular" type="standard" *ngIf="!user" type='icon' class='item' size='large'></asl-google-signin-button>
+                <asl-google-signin-button type="standard" *ngIf="!user" type='icon' class='item'></asl-google-signin-button>
                 <div *ngIf="user" class="item ui header large">{{user.name}}</div>
                 <div class="ui divider"></div>
                 <a routerLink="/settings" class="item">
