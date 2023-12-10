@@ -88,6 +88,7 @@
           <version>GCLOUD_CONFIG</version>
         </configuration>
       </plugin>
+
       <!-- [START endpoints_plugin] -->
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
@@ -95,11 +96,17 @@
         <version>2.1.0</version>
         <configuration>
           <hostname>${endpoints.project.id}.appspot.com</hostname>
+          <openApiDocDir>${project.build.directory}/openapi-docs</openApiDocDir>
+          <discoveryDocDir>${project.build.directory}/discovery-docs</discoveryDocDir>
+          <clientLibDir>${project.build.directory}/client-libs</clientLibDir>
+          <webappDir>src/main/webapp</webappDir>
         </configuration>
       </plugin>
+
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
             <configuration>
                 <release>17</release>
             </configuration>

@@ -2,20 +2,17 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
-import {environment} from "../../environments/environment";
+import {prod} from "../../environments/environment";
 import {SocialUser} from "@abacritt/angularx-social-login";
+import { users } from 'src/assets/mocks/users.mock';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    API = environment.URL + "/users/v1";
+    API = prod.URL + "/users/v1";
 
   constructor(private http :HttpClient) { }
-
-    saveOrGetUser(user: any) : Observable<User>{
-        return this.http.post<User>(this.API + '/add', user);
-    }
 
     validateTokenAndCreateSession(token: string): Observable<User> {
         return this.http.post<User>(this.API + '/validate-token', {token});
@@ -48,4 +45,9 @@ export class UserService {
             createdPetitions: entity.createdPetitions
         };
     }
+
+    getMockUser() :User {
+      return users[0];
+    }
+
 }

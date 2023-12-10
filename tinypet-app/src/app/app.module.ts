@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, isDevMode } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { SocialLoginModule, SocialAuthServiceConfig, GoogleSigninButtonModule} from "@abacritt/angularx-social-login";
 import { GoogleLoginProvider} from "@abacritt/angularx-social-login";
@@ -8,9 +8,11 @@ import { HomeComponent } from './components/home/home.component';
 import { CreatePetitionComponent } from './components/create-petition/create-petition.component';
 import { MyPetitionsComponent } from './components/my-petitions/my-petitions.component';
 import { PetitionsListComponent } from './components/petitions-list/petitions-list.component';
-import { environment } from "../environments/environment";
+import { prod } from "../environments/environment";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from "@angular/common/http";
+import { SplashScreenStateService } from './services/splash-screen-state.service';
+import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { HttpClientModule} from "@angular/common/http";
     CreatePetitionComponent,
     MyPetitionsComponent,
     PetitionsListComponent,
+    SplashScreenComponent
   ],
     imports: [
         HttpClientModule,
@@ -29,17 +32,18 @@ import { HttpClientModule} from "@angular/common/http";
         BrowserAnimationsModule,
     ],
   providers: [
+    SplashScreenStateService,
       {
       provide: 'SocialAuthServiceConfig',
-      useValue: {
-          autoLogin: true,
-          providers: [{
-                  id: GoogleLoginProvider.PROVIDER_ID,
-                  provider: new GoogleLoginProvider(environment.googleClientId)}
-          ],
-          onError: (err: any) => console.error(err)
-      } as SocialAuthServiceConfig,
-  }],
+      useValue: isDevMode() ? { providers : [] } : {
+        autoLogin: true,
+        providers: [{
+                id: GoogleLoginProvider.PROVIDER_ID,
+                provider: new GoogleLoginProvider(prod.googleClientId)}
+        ],
+        onError: (err: any) => console.error("Cannot use Google Login: " + err.message)
+    } as SocialAuthServiceConfig,
+}],
   bootstrap: [AppComponent]
 })
 

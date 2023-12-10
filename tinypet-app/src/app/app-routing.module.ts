@@ -10,7 +10,6 @@ const routes: Routes = [
   { path: 'create', component: CreatePetitionComponent },
   { path: 'petitions', component: PetitionsListComponent },
   { path: 'mypetitions', component: MyPetitionsComponent },
-
 ];
 
 @NgModule({

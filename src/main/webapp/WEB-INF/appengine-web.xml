@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <appengine-web-app xmlns="http://appengine.google.com/ns/1.0">
     <runtime>java17</runtime>
     <app-engine-apis>true</app-engine-apis>
+	<ssl-enabled>true</ssl-enabled>
+    <async-session-persistence enabled="true" />
 
     <basic-scaling>
         <max-instances>2</max-instances>
@@ -12,9 +13,7 @@
         <property name="java.util.logging.config.file" value="WEB-INF/logging.properties"/>
     </system-properties>
 
-    <!-- [START env_variables] -->
     <env-variables>
         <env-var name="ENDPOINTS_SERVICE_NAME" value="${endpoints.project.id}.appspot.com" />
     </env-variables>
-    <!-- [END env_variables] -->
 </appengine-web-app>

@@ -19,22 +19,22 @@
         <h1 class="title">Pétitions réussies</h1>
 
         <div class="ui three column grid">
-            <div class="column" *ngFor="let victory of victories">
+            <div class="column" *ngFor="let pet of items">
                 <div class="ui card">
                     <div class="image">
-                        <img src="/assets/images/Logo.png">
+                        <img src='{{pet.image}}'>
                     </div>
                     <div class="content">
-                        <a class="header">NON A LA FERMETURE D'UNE CLASSE</a>
+                        <a class="header">{{pet.title}}</a>
                         <div class="meta">
-                            <span class="date"><i class="user icon"></i>Tanguy Arnaud </span>
+                            <span class="date"><i class="user icon"></i>{{pet.author.name}}</span>
                         </div>
                         <div class="description">
-                            Signez cette pétition pour demander à la justice française de ne pas abandonner Tiphaine !
+                            {{pet.description | slice:0:100}} ...
                         </div>
                     </div>
                     <div class="extra content">
-                        <span>{{victory}}</span> signatures
+                        <span>{{pet.signatureCount}}</span> signatures
                     </div>
                 </div>
             </div>
@@ -49,35 +49,36 @@
 
 <div class="ui divider"></div>
 <br>
+
 <div class="ui grid centered">
-    <div class="twelve wide column">
-        <h3 class="subtitle">- PETITIONS -</h3>
-        <h1 class="title">Récemment lancées</h1>
-        <div class="ui three column grid">
-            <div class="column" *ngFor="let victory of victories">
-                <div class="ui card">
-                    <div class="image">
-                        <img src="/assets/images/Logo.png">
-                    </div>
-                    <div class="content">
-                        <a class="header">JUSTICE POUR TIPHAINE VERON !</a>
-                        <div class="meta">
-                            <span class="date"><i class="user icon"></i>Tanguy Arnaud</span>
-                        </div>
-                        <div class="description">
-                            Signez cette pétition pour demander à la justice française de ne pas abandonner Tiphaine !
-                        </div>
-                    </div>
-                    <div class="extra content">
-                        <span>{{victory}}</span> signatures
-                    </div>
-                    <button class="ui blue button">Je signe</button>
-                </div>
-            </div>
-        </div>
-        <br>
-        <div>
-            <button class="ui big button">Parcourir les petitions</button>
-        </div>
-    </div>
+   <div class="twelve wide column">
+       <h3 class="subtitle">- PETITIONS -</h3>
+       <h1 class="title">Récemment lancées</h1>
+       <div class="ui three column grid">
+           <div class="column" *ngFor="let pet of items">
+               <div class="ui card">
+                   <div class="image">
+                       <img src='{{pet.image}}'>
+                   </div>
+                   <div class="content">
+                       <a class="header">{{pet.title}}</a>
+                       <div class="meta">
+                           <span class="date"><i class="user icon"></i>{{pet.author.name}}</span>
+                       </div>
+                       <div class="description">
+                        {{pet.description | slice:0:100}} ...
+                       </div>
+                   </div>
+                   <div class="extra content">
+                       <span>{{pet.signatureCount}}</span> signatures
+                   </div>
+                   <button class="ui blue button">Je signe</button>
+               </div>
+           </div>
+       </div>
+       <br>
+       <div>
+           <button class="ui big button">Parcourir les petitions</button>
+       </div>
+   </div>
 </div>

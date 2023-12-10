@@ -1,1 +1,5 @@
 indexes:
+- kind: User
+  ancestor: no
+  properties:
+  - name: id
