@@ -1,65 +1,77 @@
-import {Component, OnInit} from '@angular/core';
-import {GoogleLoginProvider, SocialAuthService} from "@abacritt/angularx-social-login";
-import {MatSnackBar} from "@angular/material/snack-bar";
-import {UserService} from "./services/user.service";
-import {User} from "./models/user";
-
-declare var $: any; // jQuery
+import { Component, OnInit, isDevMode } from '@angular/core';
+import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { UserService } from './services/user.service';
+import { User } from './models/user';
+import { SplashScreenStateService } from './services/splash-screen-state.service';
 
 @Component({
     selector: 'app-root',
     templateUrl: './app.component.html',
     styleUrls: ['./app.component.css'],
 })
-
 export class AppComponent implements OnInit {
-    user: User | undefined;
-    accessToken = '';
+    public user?: User;
 
-    constructor(private authService: SocialAuthService, private _snackBar: MatSnackBar, private userService :UserService) {}
+    constructor(
+        private authService: SocialAuthService,
+        private _snackBar: MatSnackBar,
+        public userService: UserService,
+        private splashService: SplashScreenStateService
+    ) {}
+
+    // Hide splash screen after view is properly initialized
+    ngAfterViewInit() {
+        setTimeout(() => this.splashService.stop(), isDevMode() ? 0 : 1000)
+    }
+
 
     ngOnInit() {
-        // check if auth was successful
+        // Check if user is already authenticated by looking for a stored token
+        const storedToken = localStorage.getItem('authToken');
+
+        if (storedToken) {
+            this.userService
+                .validateTokenAndCreateSession(storedToken)
+                .subscribe({
+                    next: (user) => this.userService.actualUser = this.userService.convertEntityToUser(user),
+                    error: (error) => {
+                        this.logout(); // Logout user and remove token from storage
+                        this.subscribeToAuthState(); // Subscribe to authState for new login
+                    },
+                });
+        }
+        else if (!isDevMode()) this.subscribeToAuthState();
+
+        this.user = this.userService.actualUser;
+    }
+
+    private subscribeToAuthState() {
         this.authService.authState.subscribe({
-            next: (user) => {
-                let U = this.userService.convertSocialToUser(user);
-                this.userService.saveOrGetUser(U).subscribe({
-                    next: (response) => this.user = this.userService.convertEntityToUser(response),
-                    error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK')
-                })
-            }, error: (error) => {
-                console.error(error)
-                this._snackBar.open('Authentication Error: ' + error.message, 'OK')
-            }
+            next: (s_user) => {
+                if (s_user) {
+                    localStorage.setItem('authToken', s_user.idToken);
+                    this.userService
+                        .validateTokenAndCreateSession(s_user.idToken)
+                        .subscribe({
+                            next: (user) => this.userService.actualUser = this.userService.convertEntityToUser(user),
+                            error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK'),
+                        });
+                }
+            },
+            error: (error) => this._snackBar.open('Authentication Error: ' + error.message,'OK'),
         })
     }
 
     logout() {
-        this.authService.signOut().then(r => {
-            this.user = undefined;
-            this.accessToken = '';
-        }).catch(e => this._snackBar.open('Cannot logout: ' + e.message, 'OK', {
-            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-        }))
-
+        this.userService.logout()
+        this.user = this.userService.actualUser;
     }
 
-    // these are sensitive, to be secured
-    getAccessToken(): void {
-        this.authService.getAccessToken(GoogleLoginProvider.PROVIDER_ID).then(accessToken => this.accessToken = accessToken)
-            .catch(e => this._snackBar.open('Cannot get access token: ' + e.message, 'OK', {
-                duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-            }))
+    connectAsMockUser() {
+        this.userService.mockLogin();
+        this.user = this.userService.actualUser;
     }
 
-    refreshToken(): void {
-        this.authService.refreshAuthToken(GoogleLoginProvider.PROVIDER_ID).catch(e => this._snackBar.open('Cannot refresh token: ' + e.message, 'OK', {
-            duration: 3500, horizontalPosition: 'end', verticalPosition: 'top'
-        }))
-    }
-
-    // to be removed in production
-    printUser(): void {
-        console.log(this.user)
-    }
+    protected readonly isDevMode = isDevMode;
 }

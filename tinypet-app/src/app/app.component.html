@@ -3,7 +3,7 @@
     <!-- Logo -->
     <div class="left menu">
         <a routerLink="/" class="item">
-            <img class="ui image tiny" ngSrc="/assets/images/Logo.png" alt="logo" height="216" width="250">
+            <img class="ui image tiny" src="/assets/images/Logo.png" alt="logo" height="216" width="250">
         </a>
     </div>
 
@@ -11,25 +11,22 @@
     <a class="item" routerLink="create" routerLinkActive="active">Lancer une petition</a>
     <a class="item" routerLink="mypetitions" routerLinkActive="active">Mes petitions</a>
     <a class="item" routerLink="petitions" routerLinkActive="active">Liste des petitions</a>
-    <div class="item" id="item" (click)="printUser()">
-        Testing task
-    </div>
 
     <!-- login -->
     <div class="right menu">
         <div class="ui top item left simple dropdown">
-            <i *ngIf="!user" class="user icon"></i>
-            <img *ngIf="user" width="80" height="80" class="ui avatar image" ngSrc="{{user.image}}" alt="user photo">
+            <img *ngIf="user" width="80" height="80" class="ui avatar image" [src]="user.image" alt='user'>
+            <i *ngIf="!user" class="icon user"></i>
             <div class="menu">
-                <asl-google-signin-button shape="rectangular" type="standard" *ngIf="!user" type='icon' class='item' size='large'></asl-google-signin-button>
+                <asl-google-signin-button type="standard" *ngIf="!isDevMode()" type='icon' class='item'></asl-google-signin-button>
                 <div *ngIf="user" class="item ui header large">{{user.name}}</div>
                 <div class="ui divider"></div>
                 <a routerLink="/settings" class="item">
                     <i class="settings icon"></i>Parametres</a>
                 <a *ngIf="user" (click)="logout()" class="item">
                     <i class="sign out icon"></i>Se deconnecter</a>
-                <a routerLink="/help" class="item">
-                    <i class="help icon"></i>Aide</a>
+                <a *ngIf="isDevMode() && !userService.isAuthentificated" (click)="connectAsMockUser()" class="item">
+                    <i class="mask icon"></i>Debug user</a>
             </div>
         </div>
     </div>
@@ -40,7 +37,7 @@
 
 <br>
 <!-- Footer-->
-<div class="ui vertical footer segment">
+<footer class="ui vertical footer segment">
     <div class="ui center aligned container">
         <div class="ui stackable divided grid">
             <div class="four wide column">
@@ -63,7 +60,7 @@
                 </div>
             </div>
             <div class="eight wide column">
-                <img ngSrc="/assets/images/Logo.png" class="ui centered small image" height="216" width="250" alt="">
+                <img src="/assets/images/Logo.png" class="ui centered small image" height="216" width="250" alt="Big logo">
                 <p>
                     <i>“La démocratie est le gouvernement du peuple, par le peuple, pour le peuple.”</i>
                     <br>
@@ -75,6 +72,8 @@
         <span>Site réalisé par <strong>Yassine DERGAOUI</strong> gràce à <strong>Angular 17</strong> et <strong>Fomantic
                 UI</strong></span>
     </div>
-</div>
+</footer>
+
+<app-splash-screen></app-splash-screen>
 
 

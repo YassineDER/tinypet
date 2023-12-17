@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Petition } from 'src/app/models/petition';
+import { PetitionService } from 'src/app/services/petition.service';
 declare var $: any;
 
 @Component({
@@ -7,12 +9,14 @@ declare var $: any;
     styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+    items? : Petition[];
     count = 139;
-    victories = [2345, 532, 8711];
     
-    constructor() {}
+    constructor(private petitonsService: PetitionService) {}
 
     ngOnInit() {
+        this.petitonsService.getPetitions().subscribe(petitions => this.items = petitions);
+        
         setInterval(() => {
             this.count += Math.floor(Math.random() * 4);
             $('#count').text(this.count);

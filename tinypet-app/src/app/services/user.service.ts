@@ -1,34 +1,22 @@
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
-import {environment} from "../../environments/environment";
+import {prod} from "../../environments/environment";
 import {SocialUser} from "@abacritt/angularx-social-login";
+import { users } from 'src/assets/mocks/users.mock';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
-    API = environment.URL + "/users/v1";
+    API = prod.URL + "/users/v1";
+    public actualUser? :User = isDevMode() ? users[0] : undefined; // mock user is the default user (dev mode case)
 
   constructor(private http :HttpClient) { }
 
-    saveOrGetUser(user: any) : Observable<User>{
-        return this.http.post<User>(this.API + '/add', user);
-    }
-
-    convertSocialToUser(socialUser: SocialUser) {
-        let U: User = {
-            id: socialUser.id,
-            name: socialUser.name,
-            image: socialUser.photoUrl,
-            email: socialUser.email,
-            registeredDate: new Date(),
-            signedPetitions: [],
-            createdPetitions: []
-        }
-
-        return U;
+    validateTokenAndCreateSession(token: string): Observable<User> {
+        return this.http.post<User>(this.API + '/validate-token', {token});
     }
 
     convertEntityToUser(E: any) :User {
@@ -43,4 +31,19 @@ export class UserService {
             createdPetitions: entity.createdPetitions
         };
     }
+
+    logout() {
+        this.actualUser = undefined;
+        localStorage.removeItem('authToken'); // Remove token from storage
+    }
+
+    mockLogin() {
+        this.logout();
+        this.actualUser = users[0];
+    }
+
+    get isAuthentificated() :boolean {
+        return this.actualUser !== undefined;
+    }
+
 }

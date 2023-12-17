@@ -1,0 +1,42 @@
+.segment {
+    width: 1000px;
+    * {
+        width: 100%;
+    }
+}
+
+#container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+}
+
+h1{
+    font-size: 40px;
+    margin-bottom: 1rem;
+    color: #1E1A59;
+}
+
+.controls {
+    display: flex;
+    justify-content: right;
+    margin-bottom: 1rem;
+}
+
+.choices {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+
+    .ui.checkbox {
+        width: 140px;
+        text-align: center;
+        margin: 5px;
+    }
+}
+
+
+
+

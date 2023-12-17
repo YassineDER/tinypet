@@ -7,10 +7,6 @@
   <groupId>com.example.echo</groupId>
   <artifactId>tinypet</artifactId>
 
-  <!--
-    The parent pom defines common style checks and testing strategies for our samples.
-    Removing or replacing it should not effect the execution of the samples in anyway.
-  -->
   <parent>
     <groupId>com.google.cloud.samples</groupId>
     <artifactId>shared-configuration</artifactId>
@@ -19,7 +15,6 @@
 
   <properties>
     <maven.compiler.release>17</maven.compiler.release>
-
     <maven.compiler.source>17</maven.compiler.source>
     <maven.compiler.target>17</maven.compiler.target>
 
@@ -89,11 +84,11 @@
         <artifactId>appengine-maven-plugin</artifactId>
         <version>2.5.0</version>
         <configuration>
-          <port>8083</port>
           <projectId>GCLOUD_CONFIG</projectId>
           <version>GCLOUD_CONFIG</version>
         </configuration>
       </plugin>
+
       <!-- [START endpoints_plugin] -->
       <plugin>
         <groupId>com.google.cloud.tools</groupId>
@@ -101,11 +96,17 @@
         <version>2.1.0</version>
         <configuration>
           <hostname>${endpoints.project.id}.appspot.com</hostname>
+          <openApiDocDir>${project.build.directory}/openapi-docs</openApiDocDir>
+          <discoveryDocDir>${project.build.directory}/discovery-docs</discoveryDocDir>
+          <clientLibDir>${project.build.directory}/client-libs</clientLibDir>
+          <webappDir>src/main/webapp</webappDir>
         </configuration>
       </plugin>
+
         <plugin>
             <groupId>org.apache.maven.plugins</groupId>
             <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.11.0</version>
             <configuration>
                 <release>17</release>
             </configuration>
