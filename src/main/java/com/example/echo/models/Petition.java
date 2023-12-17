@@ -47,13 +47,6 @@ public class Petition {
         return tags;
     }
 
-    // tags to be generated from text by a python script
-    public void addTag(Tag tag) {
-        if (this.tags.contains(tag))
-            return;
-        this.tags.add(tag);
-    }
-
     public Integer getSignatureCount() {
         return signatureCount;
     }
@@ -72,5 +65,29 @@ public class Petition {
 
     public void addComment(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public Date getCreationDate() {
+        return creationDate;
+    }
+
+    public Integer getSignatureGoal() {
+        return signatureGoal;
+    }
+
+    public User getAuthor() {
+        return author;
     }
 }

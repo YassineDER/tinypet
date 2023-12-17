@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+import {Injectable, isDevMode} from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
@@ -11,26 +11,12 @@ import { users } from 'src/assets/mocks/users.mock';
 })
 export class UserService {
     API = prod.URL + "/users/v1";
+    public actualUser? :User = isDevMode() ? users[0] : undefined; // mock user is the default user (dev mode case)
 
   constructor(private http :HttpClient) { }
 
     validateTokenAndCreateSession(token: string): Observable<User> {
         return this.http.post<User>(this.API + '/validate-token', {token});
-    }
-
-    convertSocialToUser(socialUser: SocialUser) {
-        if (!socialUser) return undefined;
-        let U: User = {
-            id: socialUser.id,
-            name: socialUser.name,
-            image: socialUser.photoUrl,
-            email: socialUser.email,
-            registeredDate: new Date(),
-            signedPetitions: [],
-            createdPetitions: []
-        }
-
-        return U;
     }
 
     convertEntityToUser(E: any) :User {
@@ -46,8 +32,18 @@ export class UserService {
         };
     }
 
-    getMockUser() :User {
-      return users[0];
+    logout() {
+        this.actualUser = undefined;
+        localStorage.removeItem('authToken'); // Remove token from storage
+    }
+
+    mockLogin() {
+        this.logout();
+        this.actualUser = users[0];
+    }
+
+    get isAuthentificated() :boolean {
+        return this.actualUser !== undefined;
     }
 
 }

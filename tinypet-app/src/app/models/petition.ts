@@ -3,7 +3,6 @@ import { Tag } from "./tag";
 import { User } from "./user";
 
 export interface Petition {
-    id: number;
     title: string;
     image: string;
     description: string;

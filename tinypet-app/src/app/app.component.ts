@@ -11,20 +11,18 @@ import { SplashScreenStateService } from './services/splash-screen-state.service
     styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-    user?: User;
+    public user?: User;
 
     constructor(
         private authService: SocialAuthService,
         private _snackBar: MatSnackBar,
-        private userService: UserService,
+        public userService: UserService,
         private splashService: SplashScreenStateService
     ) {}
 
     // Hide splash screen after view is properly initialized
     ngAfterViewInit() {
-        setTimeout(() => {
-            this.splashService.stop();
-        }, 1500);
+        setTimeout(() => this.splashService.stop(), isDevMode() ? 0 : 1000)
     }
 
 
@@ -36,16 +34,16 @@ export class AppComponent implements OnInit {
             this.userService
                 .validateTokenAndCreateSession(storedToken)
                 .subscribe({
-                    next: (user) =>
-                        (this.user =
-                            this.userService.convertEntityToUser(user)),
+                    next: (user) => this.userService.actualUser = this.userService.convertEntityToUser(user),
                     error: (error) => {
                         this.logout(); // Logout user and remove token from storage
                         this.subscribeToAuthState(); // Subscribe to authState for new login
                     },
                 });
-        } else if (!isDevMode()) this.subscribeToAuthState();
-        else this.user = this.userService.getMockUser();
+        }
+        else if (!isDevMode()) this.subscribeToAuthState();
+
+        this.user = this.userService.actualUser;
     }
 
     private subscribeToAuthState() {
@@ -56,7 +54,7 @@ export class AppComponent implements OnInit {
                     this.userService
                         .validateTokenAndCreateSession(s_user.idToken)
                         .subscribe({
-                            next: (user) => this.user = this.userService.convertEntityToUser(user),
+                            next: (user) => this.userService.actualUser = this.userService.convertEntityToUser(user),
                             error: (error) => this._snackBar.open('Request Error: ' + error.message, 'OK'),
                         });
                 }
@@ -66,12 +64,14 @@ export class AppComponent implements OnInit {
     }
 
     logout() {
-        this.user = undefined;
-        localStorage.removeItem('authToken'); // Remove token from storage
+        this.userService.logout()
+        this.user = this.userService.actualUser;
     }
 
-    // to be removed in production
-    testTask() {
-        console.log(this.user);
+    connectAsMockUser() {
+        this.userService.mockLogin();
+        this.user = this.userService.actualUser;
     }
+
+    protected readonly isDevMode = isDevMode;
 }

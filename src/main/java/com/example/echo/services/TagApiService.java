@@ -1,6 +1,5 @@
 package com.example.echo.services;
 
-import com.example.echo.models.Petition;
 import com.example.echo.models.Tag;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -16,18 +15,18 @@ public class TagApiService {
     public List<Entity> getTags() {
         Query q = new Query("Tag");
         PreparedQuery pq = datastore.prepare(q);
-        List<Entity> results = pq.asList(FetchOptions.Builder.withDefaults());
+        List<Entity> results = pq.asList(FetchOptions.Builder.withDefaults().limit(15));
         return results;
     }
 
     @ApiMethod(name = "addTag", path = "add", httpMethod = HttpMethod.POST)
-    public Tag addTag(Tag tag) {
+    public Entity addTag(Tag tag) {
         Entity tagEntity = new Entity("Tag");
         tagEntity.setProperty("name", tag.toString());
         Transaction t = datastore.beginTransaction();
         datastore.put(tagEntity);
         t.commit();
-        return tag;
+        return tagEntity;
     }
 
 

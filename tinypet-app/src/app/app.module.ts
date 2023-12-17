@@ -13,6 +13,8 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule} from "@angular/common/http";
 import { SplashScreenStateService } from './services/splash-screen-state.service';
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
+import {MatSliderModule} from "@angular/material/slider";
 
 @NgModule({
   declarations: [
@@ -30,6 +32,9 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
         SocialLoginModule,
         GoogleSigninButtonModule,
         BrowserAnimationsModule,
+        FormsModule,
+        ReactiveFormsModule,
+        MatSliderModule
     ],
   providers: [
     SplashScreenStateService,

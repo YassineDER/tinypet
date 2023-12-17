@@ -19,7 +19,9 @@ public class UserApiService {
     static final GoogleIdTokenVerifier verifier = new GoogleIdTokenVerifier.Builder(new NetHttpTransport(), new JacksonFactory())
             .setAudience(List.of("527092413767-a12gm70hgua8ers9ommcuqk77919ci4j.apps.googleusercontent.com"))
             .build();
+
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
+
 
     @ApiMethod(name = "deleteUser", path = "delete", httpMethod = ApiMethod.HttpMethod.DELETE)
     public void deleteUser(User user) {
@@ -31,12 +33,10 @@ public class UserApiService {
     }
 
     @ApiMethod(name = "getUsers", path = "all", httpMethod = ApiMethod.HttpMethod.GET)
-    public List<Entity> getAllUsers(@Named("page") int page) {
-        final int pageSize = 10; // Limit the results to 10 per page
-        int offset = (page - 1) * pageSize;
+    public List<Entity> getAllUsers() {
         Query q = new Query("User");
         PreparedQuery pq = datastore.prepare(q);
-        return pq.asList(FetchOptions.Builder.withLimit(pageSize).offset(offset));
+        return pq.asList(FetchOptions.Builder.withLimit(20));
     }
 
 
