@@ -6,16 +6,9 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.*;
 import com.google.api.server.spi.config.Named;
-import com.google.api.server.spi.response.BadRequestException;
-import com.google.appengine.api.blobstore.BlobKey;
-import com.google.appengine.api.blobstore.BlobstoreService;
-import com.google.appengine.api.blobstore.BlobstoreServiceFactory;
 import com.google.appengine.api.datastore.*;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
 
 @Api(name = "petitions", version = "v1")
 public class PetitionApiService {
@@ -65,20 +58,10 @@ public class PetitionApiService {
         return pq.asList(FetchOptions.Builder.withLimit(pageSize).offset(offset));
     }
 
-    @ApiMethod(name = "uploadImage")
-    public String uploadImage( HttpServletRequest request) {
+//    @ApiMethod(name = "uploadImage")
+//    public void uploadImage( HttpServletRequest request) {
 //        return blobstoreService.createUploadUrl("/api/petitions/upload");
-        return "En cours de développement";
-    }
+//        return "En cours de développement";
+//    }
 
-    @ApiMethod(name = "uploadHandler")
-    public void uploadHandler(Map<String, List<BlobKey>> blobs) throws BadRequestException {
-//        if (blobs == null || blobs.isEmpty() || !blobs.containsKey("image")) {
-//            log.warning("No image uploaded");
-//        } else {
-//            BlobKey blobKey = blobKeys.get(0);
-//            log.info("Image uploaded: " + blobKey.getKeyString());
-//        }
-        return;
-    }
 }

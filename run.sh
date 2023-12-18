@@ -4,21 +4,21 @@
 set -e
 
 # Change to the output directory
-pushd src/main/webapp
+pushd src/main/webapp || exit
 
 # Delete all files and directories except WEB-INF
-find . -mindepth 1 ! -regex '^./WEB-INF\(/.*\)?' -delete
+find . -mindepth 1 ! -regex '^./WEB-INF\(/.*\)?' -delete || exit
 
 # Change back to the script directory
-popd
+popd || exit
 
 # Run Angular build
-pushd tinypet-app
-ng build
-popd
+pushd tinypet-app || exit
+ng build || exit
+popd || exit
 
 # Clean and package your project
-mvn clean install
+mvn clean install || exit
 
 # Deploy
-mvn appengine:run
+mvn appengine:run || exit

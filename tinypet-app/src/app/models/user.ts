@@ -5,7 +5,6 @@ export interface User {
     name: string;
     image: string;
     email: string;
-    registeredDate: Date;
     signedPetitions: Petition[];
     createdPetitions: Petition[];
 }

@@ -1,29 +1,18 @@
 #!/bin/bash
 
-# Stop the script on errors
 set -e
 
-# Change to the output directory
-pushd src/main/webapp
+pushd src/main/webapp || exit
+find . -mindepth 1 ! -regex '^./WEB-INF\(/.*\)?' -delete || exit
+popd || exit
 
-# Delete all files and directories except WEB-INF
-find . -mindepth 1 ! -regex '^./WEB-INF\(/.*\)?' -delete
+pushd tinypet-app || exit
+ng build || exit
+popd || exit
 
-# Change back to the script directory
-popd
+mvn clean install || exit
 
-# Run Angular build
-pushd tinypet-app
-ng build
-popd
+mvn endpoints-framework:openApiDocs || exit
+gcloud endpoints services deploy target/openapi-docs/openapi.json || exit
 
-# Clean and package your project
-mvn clean install
-
-# Generate API
-mvn endpoints-framework:openApiDocs
-
-gcloud endpoints services deploy target/openapi-docs/openapi.json
-
-# Deploy
-mvn appengine:deploy
+mvn appengine:deploy || exit

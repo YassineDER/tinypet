@@ -1,11 +1,10 @@
-import {Component} from '@angular/core';
+import {Component, isDevMode} from '@angular/core';
 import {TagService} from "../../services/tag.service";
 import {Tag} from "../../models/tag";
 import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {PetitionService} from "../../services/petition.service";
 import {UserService} from "../../services/user.service";
 import {SnackBarService} from "../../services/snack-bar.service";
-import { MatSliderModule} from "@angular/material/slider";
 
 declare var $: any; // jquery
 
@@ -16,13 +15,14 @@ declare var $: any; // jquery
 })
 
 export class CreatePetitionComponent {
-    public step = 1;
-    public maxStep = 4;
-    public tags: Tag[] = [];
-    public createPetitionForm: FormGroup;
-    selectedImage: File | null = null;
-    public selectedTags: Tag[] = [];
-    public goal: number = 50;
+    step = 1;
+    maxStep = 4;
+    tags: Tag[] = [];
+    createPetitionForm: FormGroup;
+    selectedImage?: File;
+    imagePreview?: string;
+    selectedTags: Tag[] = [];
+    goal: number = 50;
 
 
     constructor(private tagService: TagService, private petitionService: PetitionService,
@@ -53,10 +53,16 @@ export class CreatePetitionComponent {
 
 
     ngOnInit() {
-        // onChange: (value: any) => this.createPetitionForm.get('signatureGoal')?.setValue(value)
         this.tagService.getTags().subscribe({
             next: tags => this.tags = tags,
             error: err => this.snack.alert(err.message, 3000)
+        })
+
+        document.addEventListener('keydown', (event) => {
+            const key = event.key;
+            const digit = parseInt(key, 10); // Attempt to parse the key as a digit
+            if (!isNaN(digit) && digit >= 1 && digit <= 4 && isDevMode())
+                this.step = digit
         })
     }
 
@@ -111,21 +117,18 @@ export class CreatePetitionComponent {
     }
 
 
-    public onImageSelected($event: any) {
-        this.selectedImage = ($event.target as HTMLInputElement).files![0];
+    public onImageSelected(event: any) {
+        this.selectedImage = event.target.files[0];
+        if (!this.selectedImage) return;
+        const reader = new FileReader();
+        reader.onload = () => this.imagePreview = reader.result as string;
+        reader.readAsDataURL(this.selectedImage);
     }
 
     uploadImage() {
-        if (this.selectedImage) {
-            const fd = new FormData();
-            fd.append('image', this.selectedImage, this.selectedImage.name);
-
-            this.petitionService.uploadImage(fd).subscribe({
-                // next: res => this.createPetitionForm.get('image')?.setValue(res),
-                next: res => console.log(res),
-                error: err => console.error(err.message)
-            })
-        } else this.snack.alert("No image selected", 3000)
+        if (this.selectedImage && this.selectedImage.size < 10000000) {
+            this.snack.alert("Fonctionnalité en cours de développement", 3000)
+        } else this.snack.alert("No image selected or image too big", 3000)
     }
 
     public nextStep() {
