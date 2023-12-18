@@ -5,25 +5,22 @@ import endpoints.repackaged.com.fasterxml.jackson.annotation.*;
 import java.util.Date;
 import java.util.List;
 
-@JsonPropertyOrder({"id", "name", "email", "image", "registredDate", "signedPetitions", "createdPetitions"})
+@JsonPropertyOrder({"id", "name", "email", "image", "signedPetitions", "createdPetitions"})
 public class User {
     String id;
     String name;
     String email;
     String image;
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE MMM dd HH:mm:ss zzz yyyy")
-    Date registredDate;
     List<Petition> signedPetitions;
     List<Petition> createdPetitions;
 
     public User() {}
 
-    public User(String id, String name, String email, String image, Date registredDate, List<Petition> signedPetitions, List<Petition> createdPetitions) {
+    public User(String id, String name, String email, String image, List<Petition> signedPetitions, List<Petition> createdPetitions) {
         this.id = id;
         this.name = name;
         this.email = email;
         this.image = image;
-        this.registredDate = registredDate;
         this.signedPetitions = signedPetitions;
         this.createdPetitions = createdPetitions;
     }
@@ -42,14 +39,6 @@ public class User {
 
     public String getImage() {
         return image;
-    }
-
-    public Date getRegistredDate() {
-        return registredDate;
-    }
-
-    public void setRegistredDate(Date registredDate) {
-        this.registredDate = registredDate;
     }
 
     public List<Petition> getSignedPetitions() {

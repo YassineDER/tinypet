@@ -68,7 +68,6 @@ public class UserApiService {
                 userEntity.setProperty("name", name);
                 userEntity.setProperty("email", email);
                 userEntity.setProperty("image", imageUrl);
-                userEntity.setProperty("registredDate",  new Date());
                 userEntity.setProperty("signedPetitions", List.of());
                 userEntity.setProperty("createdPetitions", List.of());
 

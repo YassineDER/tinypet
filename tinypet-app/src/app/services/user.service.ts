@@ -3,7 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {User} from "../models/user";
 import {prod} from "../../environments/environment";
-import {SocialUser} from "@abacritt/angularx-social-login";
+import {GoogleLoginProvider, SocialAuthService, SocialUser} from "@abacritt/angularx-social-login";
 import { users } from 'src/assets/mocks/users.mock';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class UserService {
     API = prod.URL + "/users/v1";
     public actualUser? :User = isDevMode() ? users[0] : undefined; // mock user is the default user (dev mode case)
 
-  constructor(private http :HttpClient) { }
+  constructor(private http :HttpClient,  private social: SocialAuthService) { }
 
     validateTokenAndCreateSession(token: string): Observable<User> {
         return this.http.post<User>(this.API + '/validate-token', {token});
@@ -26,7 +26,6 @@ export class UserService {
             name: entity.name,
             image: entity.image,
             email: entity.email,
-            registeredDate: new Date(entity.registeredDate),
             signedPetitions: entity.signedPetitions,
             createdPetitions: entity.createdPetitions
         };

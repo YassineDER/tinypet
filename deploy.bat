@@ -19,19 +19,23 @@ POPD
 REM Run Angular build
 PUSHD tinypet-app
 CALL ng build
+IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
 POPD
 
 REM Clean and package your project
 call mvn clean install
-if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
 
 REM Generate API
 call mvn endpoints-framework:openApiDocs
-if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
 
 call gcloud endpoints services deploy target\openapi-docs\openapi.json
-if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
 
 REM Deploy
 call mvn appengine:deploy
-if %ERRORLEVEL% neq 0 exit /b %ERRORLEVEL%
+IF %ERRORLEVEL% NEQ 0 EXIT /B %ERRORLEVEL%
+
+REM Exit normally if no errors occurred
+EXIT /B 0

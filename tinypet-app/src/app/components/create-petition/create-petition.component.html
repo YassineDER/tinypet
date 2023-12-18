@@ -36,7 +36,7 @@
         <h1>Quelle est la thématique qui correspond le mieux à votre pétition ?</h1>
         <p>Le thème est important. Choisissez le thème représentant le mieux votre pétition.</p>
         <div class="choices">
-            <div *ngIf="tags.length == 0" class="ui big loader"></div>
+            <div *ngIf="tags.length == 0" class="ui active big inline primary slow loader"></div>
             <div class="ui invisible tiny checkbox" *ngFor="let tag of tags; let i = index">
                 <input type="checkbox" id="ex{{tag.name}}" (change)="onCheckChange($event)" [value]="tag.name">
                 <label for="ex{{tag.name}}" class="ui blue message ">{{tag.name}}</label>
@@ -79,11 +79,18 @@
     <div class="ui raised large segment" [style.display]="step === 4 ? 'block' : 'none'">
         <h1>Comment représenter votre pétition ?</h1>
         <p>Votre photo doit transmettre l’émotion de votre pétition. Elle doit respecter les dimensions (500 * 300)</p>
-        <input type="file" accept="image/*"  id="invisibleupload2" (change)="onImageSelected($event)" class="ui invisible file input">
-        <label for="invisibleupload2" class="ui placeholder segment">
-            <div class="ui icon header"><i class="upload icon"></i> Clickez ici pour ajouter une photo </div>
-        </label>
-        <button type="button" class="ui button large red" (click)="uploadImage()">Upload</button>
+        <div class="ui equal width grid">
+            <div *ngIf="imagePreview" [style.margin-left]="'6px'" class="ui column segment">
+                <img [src]="imagePreview" [width]="500" [height]="300">
+            </div>
+            <div class="column">
+                <input type="file" accept="image/*"  id="invisibleupload2" (change)="onImageSelected($event)" class="ui invisible file input">
+                <label for="invisibleupload2" class="ui placeholder segment">
+                    <div class="ui icon header"><i class="upload icon"></i> Clickez ici pour ajouter une photo </div>
+                </label>
+                <button type="button" class="ui button large red" (click)="uploadImage()">Upload</button>
+            </div>
+        </div>
     </div>
 
     <div class="controls">
