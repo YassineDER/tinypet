@@ -1,38 +1,32 @@
 package com.example.echo.models;
 
+import com.example.echo.config.TextDeserializer;
+import com.example.echo.config.TextSerializer;
 import com.example.echo.exceptions.CannotSignPetitionException;
-import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonFormat;
-import endpoints.repackaged.com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.google.appengine.api.datastore.Text;
 
 import java.util.Date;
 import java.util.List;
 
-@JsonPropertyOrder({"id", "title", "description", "image", "creationDate", "tags", "signatureCount", "signatureGoal", "author", "comments"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
+@JsonPropertyOrder({"id", "title", "description", "image", "creationDate", "tags", "signatureCount", "signatureGoal", "author"})
 public class Petition {
     Long id;
     String title;
     String description;
-    String image;
+    @JsonDeserialize(using = TextDeserializer.class)
+    Text image;
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "EEE MMM dd HH:mm:ss zzz yyyy")
     Date creationDate;
     List<Tag> tags;
     Integer signatureCount;
     Integer signatureGoal;
-    User author;
-    List<Comment> comments;
+    String author;
 
-    public Petition(String title, String description, String image, Integer signatureGoal, User author) {
-        this.title = title;
-        this.description = description;
-        this.image = image;
-        this.creationDate = new Date();
-        this.tags = List.of();
-        this.signatureCount = 0;
-        this.signatureGoal = signatureGoal;
-        this.author = author;
-        this.comments = List.of();
-
-        this.author.createdPetitions.add(this);
+    public Petition() {
     }
 
     public Long getId() {
@@ -43,28 +37,13 @@ public class Petition {
         this.id = id;
     }
 
+    @JsonProperty("tags")
     public List<Tag> getTags() {
         return tags;
     }
 
     public Integer getSignatureCount() {
         return signatureCount;
-    }
-
-    public void sign(User user) {
-        if (this.signatureCount >= this.signatureGoal)
-            throw new CannotSignPetitionException("Petition has reached signature goal");
-
-        this.signatureCount++;
-        user.signedPetitions.add(this);
-    }
-
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void addComment(Comment comment) {
-        this.comments.add(comment);
     }
 
     public String getTitle() {
@@ -75,7 +54,7 @@ public class Petition {
         return description;
     }
 
-    public String getImage() {
+    public Text getImage() {
         return image;
     }
 
@@ -87,7 +66,7 @@ public class Petition {
         return signatureGoal;
     }
 
-    public User getAuthor() {
+    public String getAuthor() {
         return author;
     }
 }

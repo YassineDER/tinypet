@@ -1,10 +1,10 @@
 package com.example.echo.models;
 
-import endpoints.repackaged.com.fasterxml.jackson.annotation.*;
+import com.fasterxml.jackson.annotation.*;
 
-import java.util.Date;
 import java.util.List;
 
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 @JsonPropertyOrder({"id", "name", "email", "image", "signedPetitions", "createdPetitions"})
 public class User {
     String id;
@@ -56,4 +56,22 @@ public class User {
     public void setCreatedPetitions(List<Petition> createdPetitions) {
         this.createdPetitions = createdPetitions;
     }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+
 }

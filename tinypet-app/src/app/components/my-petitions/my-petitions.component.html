@@ -1,1 +1,78 @@
-<p>my-petitions works!</p>
+<div class="ui container">
+    <br>
+    <div class="ui segment">
+        <img class="ui bordered small centered circular image" (click)="test()" src="{{user?.image}}">
+        <h2 class="ui center aligned header">{{user?.name}}</h2>
+
+        <div class="ui secondary pointing large menu">
+            <a (click)="tab = 1" class="item" [ngClass]="{'active' : tab == 1}">Petitions crées</a>
+            <a (click)="tab = 2" class="item" [ngClass]="{'active' : tab == 2}">Petitions signées</a>
+        </div>
+
+        <div *ngIf="tab == 1">
+            <p [style.font-size]="'16px'" *ngIf="myPetitions?.length === 0; else displayThem">
+                Pas de pétitions crées, vous pouvez en créer une <a routerLink="/create">ici</a>
+            </p>
+
+            <ng-template #displayThem>
+                <div class="ui cards horizontal">
+                    <div class="card" [style.width]="'100%'" *ngFor="let pet of myPetitions">
+                        <img class="image" src="{{pet.image}}">
+                        <div class="content">
+                            <div class="header left">{{pet.title}}</div>
+                            <div class="description">{{pet.description}}</div>
+                        </div>
+                        <div class="ui horizontal divider"></div>
+                        <div class="extra content ui equal width grid">
+                            <div class="column left floated">
+                                <i class="user icon"></i>{{pet.author}}
+                            </div>
+                            <div class="column center aligned">
+                                <i class="pen nib icon"></i>
+                                {{ pet.signatureCount }} / {{ pet.signatureGoal }}
+                            </div>
+                            <div class="column" [style.text-align]="'right'">
+                                <i class="calendar icon"></i>{{formatDate(pet.creationDate)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+
+        <div class="ui bottom attached segment" *ngIf="tab == 2">
+            <p [style.font-size]="'16px'" *ngIf="myPetitions?.length === 0; else displayThem">
+                Pas de pétitions signées, vous pouvez en signer une <a routerLink="/petitions">ici</a>
+            </p>
+
+            <ng-template #displayThem>
+                <div class="ui cards horizontal">
+                    <div class="card" [style.width]="'100%'" *ngFor="let pet of myPetitions">
+                        <img class="image" src="{{pet.image}}">
+                        <div class="content">
+                            <div class="header left">{{pet.title}}</div>
+                            <div class="description">{{pet.description}}</div>
+                        </div>
+                        <div class="ui horizontal divider"></div>
+                        <div class="extra content ui equal width grid">
+                            <div class="column left floated">
+                                <i class="user icon"></i>{{pet.author}}
+                            </div>
+                            <div class="column center aligned">
+                                <i class="pen nib icon"></i>
+                                {{ pet.signatureCount }} / {{ pet.signatureGoal }}
+                            </div>
+                            <div class="column" [style.text-align]="'right'">
+                                <i class="calendar icon"></i>{{formatDate(pet.creationDate)}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </ng-template>
+        </div>
+
+    </div>
+
+
+</div>

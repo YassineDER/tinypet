@@ -77,18 +77,17 @@
 
 <!--    Ajout d'une photo-->
     <div class="ui raised large segment" [style.display]="step === 4 ? 'block' : 'none'">
-        <h1>Comment représenter votre pétition ?</h1>
+        <h1 (click)="test()">Comment représenter votre pétition ?</h1>
         <p>Votre photo doit transmettre l’émotion de votre pétition. Elle doit respecter les dimensions (500 * 300)</p>
         <div class="ui equal width grid">
             <div *ngIf="imagePreview" [style.margin-left]="'6px'" class="ui column segment">
                 <img [src]="imagePreview" [width]="500" [height]="300">
             </div>
             <div class="column">
-                <input type="file" accept="image/*"  id="invisibleupload2" (change)="onImageSelected($event)" class="ui invisible file input">
+                <input type="file" accept="image/*" id="invisibleupload2" (change)="onImageSelected($event)" class="ui invisible file input">
                 <label for="invisibleupload2" class="ui placeholder segment">
                     <div class="ui icon header"><i class="upload icon"></i> Clickez ici pour ajouter une photo </div>
                 </label>
-                <button type="button" class="ui button large red" (click)="uploadImage()">Upload</button>
             </div>
         </div>
     </div>
@@ -96,7 +95,7 @@
     <div class="controls">
         <button type="button" *ngIf="step > 1" class="ui button large black" (click)="prevStep()">Etape précèdente</button>
         <button type="button" *ngIf="(step !== maxStep)" [disabled]="noTagSelected()" class="ui button large blue" (click)="nextStep()">Etape suivante</button>
-        <button type="submit" class="ui button large green" [disabled]="(step !== maxStep)">Publier</button>
+        <button type="submit" *ngIf="step == maxStep" class="ui button large green" [disabled]="addingPetition">Publier</button>
     </div>
 </form>
 

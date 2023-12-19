@@ -11,12 +11,12 @@ declare var $: any;
 export class HomeComponent implements OnInit {
     items? : Petition[];
     count = 139;
-    
+
     constructor(private petitonsService: PetitionService) {}
 
     ngOnInit() {
-        this.petitonsService.getPetitions().subscribe(petitions => this.items = petitions);
-        
+        this.petitonsService.getMockPetitions().subscribe(petitions => this.items = petitions);
+
         setInterval(() => {
             this.count += Math.floor(Math.random() * 4);
             $('#count').text(this.count);

@@ -1,6 +1,7 @@
 package com.example.echo.services;
 
 import com.example.echo.models.Petition;
+import com.example.echo.models.Tag;
 import com.example.echo.models.User;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
@@ -8,6 +9,7 @@ import com.google.api.server.spi.config.ApiMethod.*;
 import com.google.api.server.spi.config.Named;
 import com.google.appengine.api.datastore.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Api(name = "petitions", version = "v1")
@@ -19,6 +21,7 @@ public class PetitionApiService {
     @ApiMethod(name = "addPetition", path = "create", httpMethod = HttpMethod.POST)
     public Entity createPetition(Petition petition) {
         Entity p = new Entity("Petition");
+        p.setProperty("id", petition.getId());
         p.setProperty("title", petition.getTitle());
         p.setProperty("description", petition.getDescription());
         p.setProperty("author", petition.getAuthor());
@@ -26,8 +29,14 @@ public class PetitionApiService {
         p.setProperty("signatureGoal", petition.getSignatureGoal());
         p.setProperty("creationDate", petition.getCreationDate());
         p.setProperty("image", petition.getImage());
-        p.setProperty("tags", petition.getTags());
-        p.setProperty("comments", petition.getComments());
+        List<Tag> tags = petition.getTags();
+        List<EmbeddedEntity> embeddedTags = new ArrayList<>();
+        for (Tag tag : tags) {
+            EmbeddedEntity embeddedTag = new EmbeddedEntity();
+            embeddedTag.setProperty("name", tag.getName());
+            embeddedTags.add(embeddedTag);
+        }
+        p.setProperty("tags", embeddedTags);
 
         Transaction t = datastore.beginTransaction();
         datastore.put(p);
@@ -39,7 +48,7 @@ public class PetitionApiService {
     @ApiMethod(name = "myPetitions", path = "of", httpMethod = HttpMethod.GET)
     public List<Entity> getPetitions(User user) {
         Query q = new Query("Petition");
-        q.setFilter(new Query.FilterPredicate("author", Query.FilterOperator.EQUAL, user.getId()));
+        q.setFilter(new Query.FilterPredicate("author", Query.FilterOperator.EQUAL, user.getName()));
         return datastore.prepare(q).asList(FetchOptions.Builder.withLimit(10));
     }
 
@@ -57,11 +66,5 @@ public class PetitionApiService {
         PreparedQuery pq = datastore.prepare(q);
         return pq.asList(FetchOptions.Builder.withLimit(pageSize).offset(offset));
     }
-
-//    @ApiMethod(name = "uploadImage")
-//    public void uploadImage( HttpServletRequest request) {
-//        return blobstoreService.createUploadUrl("/api/petitions/upload");
-//        return "En cours de développement";
-//    }
 
 }
