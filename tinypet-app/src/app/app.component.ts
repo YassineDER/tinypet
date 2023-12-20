@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from './services/user.service';
 import { User } from './models/user';
 import { SplashScreenStateService } from './services/splash-screen-state.service';
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-root',
@@ -17,7 +18,8 @@ export class AppComponent implements OnInit {
         private authService: SocialAuthService,
         private _snackBar: MatSnackBar,
         public userService: UserService,
-        private splashService: SplashScreenStateService
+        private splashService: SplashScreenStateService,
+        private router: Router
     ) {}
 
     // Hide splash screen after view is properly initialized
@@ -39,7 +41,7 @@ export class AppComponent implements OnInit {
                         this.user = this.userService.actualUser;
                     },
                     error: (error) => {
-                        this.logout(); // Logout user and remove token from storage
+                        this.logout(true); // Logout user and remove token from storage
                         this.subscribeToAuthState(); // Subscribe to authState for new login
                     },
                 });
@@ -72,9 +74,11 @@ export class AppComponent implements OnInit {
         })
     }
 
-    logout() {
+    logout(auto = false) {
         this.userService.logout()
         this.user = this.userService.actualUser;
+        if (!auto)
+            this.router.navigateByUrl('/').then(r => this._snackBar.open('Logged out', 'OK'))
     }
 
     connectAsMockUser() {

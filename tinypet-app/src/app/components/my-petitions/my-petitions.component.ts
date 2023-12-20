@@ -13,7 +13,6 @@ declare var $: any;
 })
 export class MyPetitionsComponent implements OnInit {
     user? :User;
-    tab = 1;
     myPetitions?: Petition[];
     signedPetitions?: Petition[];
 
@@ -22,9 +21,8 @@ export class MyPetitionsComponent implements OnInit {
 
     ngOnInit() {
         this.user = this.userService.actualUser;
-        this.petService.getPetitions().subscribe(petitions =>
+        this.petService.getMyPetitions(this.user?.name).subscribe(petitions =>
             this.myPetitions = this.petService.convertEntityListToPetitions(petitions))
-
 
     }
 

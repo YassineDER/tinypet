@@ -25,6 +25,18 @@ export class PetitionService {
         return this.http.get<Petition[]>(this.API + "/all?page=1");
     }
 
+    getMyPetitions(name: string | undefined): Observable<Petition[]> {
+        return this.http.get<Petition[]>(this.API + "/mine?user=" + name);
+    }
+
+    getPetitionById(id: string): Observable<Petition> {
+        return this.http.get<Petition>(this.API + "/get?id=" + id);
+    }
+
+    updatePetition(petition: Petition): Observable<Petition> {
+        return this.http.put<Petition>(this.API + "/sign", petition);
+    }
+
     convertEntityListToPetitions(entity: any): Petition[] {
         const petitions: Petition[] = [];
 
@@ -34,7 +46,7 @@ export class PetitionService {
                     id: item.properties.id,
                     title: item.properties.title,
                     description: item.properties.description,
-                    image: item.properties.image,
+                    image: item.properties.image.value,
                     author: item.properties.author,
                     signatureCount: parseInt(item.properties.signatureCount, 10),
                     signatureGoal: parseInt(item.properties.signatureGoal, 10),
@@ -42,14 +54,11 @@ export class PetitionService {
                     tags: item.properties.tags.map((tag: any) => ({
                         name: tag.properties.name
                     }))
-                };
-
+                }
                 petitions.push(petition);
-            });
+            })
         }
-
         return petitions;
     }
-
 
 }

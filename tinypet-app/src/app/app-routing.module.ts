@@ -5,12 +5,15 @@ import { PetitionsListComponent } from './components/petitions-list/petitions-li
 import { MyPetitionsComponent } from './components/my-petitions/my-petitions.component';
 import { HomeComponent } from './components/home/home.component';
 import {badGuard} from "./services/bad.guard";
+import {PetitionComponent} from "./components/petition/petition.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'create', component: CreatePetitionComponent, canActivate: [badGuard] },
   { path: 'petitions', component: PetitionsListComponent },
+    { path: 'petition/:id', component: PetitionComponent },
   { path: 'mypetitions', component: MyPetitionsComponent, canActivate: [badGuard] },
+    { path: '**', redirectTo: '' },
 ];
 
 @NgModule({
