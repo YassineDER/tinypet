@@ -11,7 +11,7 @@ import { users } from 'src/assets/mocks/users.mock';
 })
 export class UserService {
     API = prod.URL + "/users/v1";
-    public actualUser? :User = isDevMode() ? users[0] : undefined; // mock user is the default user (dev mode case)
+    public actualUser? :User = isDevMode() ? users[2] : undefined; // mock user is the default user (dev mode case)
 
   constructor(private http :HttpClient,  private social: SocialAuthService) { }
 

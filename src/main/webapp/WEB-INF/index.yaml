@@ -1,5 +1,7 @@
 indexes:
-- kind: User
-  ancestor: no
+- kind: Petition
   properties:
-  - name: id
+    - name: creationDate
+      direction: desc
+    - name: signatureCount
+      direction: asc

@@ -15,6 +15,7 @@ import { SplashScreenStateService } from './services/splash-screen-state.service
 import { SplashScreenComponent } from './components/splash-screen/splash-screen.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
+import {PetitionComponent} from "./components/petition/petition.component";
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import {MatSliderModule} from "@angular/material/slider";
     CreatePetitionComponent,
     MyPetitionsComponent,
     PetitionsListComponent,
-    SplashScreenComponent
+    SplashScreenComponent,
+      PetitionComponent
   ],
     imports: [
         HttpClientModule,

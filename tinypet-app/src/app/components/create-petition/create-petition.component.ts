@@ -5,6 +5,7 @@ import {FormArray, FormBuilder, FormControl, FormGroup, Validators} from "@angul
 import {PetitionService} from "../../services/petition.service";
 import {UserService} from "../../services/user.service";
 import {SnackBarService} from "../../services/snack-bar.service";
+import {Router} from "@angular/router";
 
 declare var $: any; // jquery
 
@@ -18,6 +19,7 @@ export class CreatePetitionComponent {
     step = 1;
     maxStep = 4;
     tags: Tag[] = [];
+    addingPetition: boolean = false;
     createPetitionForm: FormGroup;
     selectedImage?: File;
     imagePreview?: string;
@@ -25,9 +27,10 @@ export class CreatePetitionComponent {
     goal: number = 50;
 
 
-    constructor(private tagService: TagService, private petitionService: PetitionService,
+    constructor(private tagService: TagService, private petitionService: PetitionService, private router : Router,
                 private userService: UserService, private builder: FormBuilder, private snack: SnackBarService) {
         this.createPetitionForm = this.builder.group({
+            id: new FormControl(Math.floor(Math.random() * 1000000), [Validators.required]),
             tags: new FormArray([], [Validators.minLength(1), Validators.required]),
             title: new FormControl('', [
                 Validators.minLength(8),
@@ -39,15 +42,13 @@ export class CreatePetitionComponent {
                 Validators.required]),
             image: new FormControl('https://dummyimage.com/500x300/cccccc/fff.png&text=+'),
             creationDate: new FormControl(new Date()),
-            comments: new FormControl([]),
             signatureGoal: new FormControl(50, [
                 Validators.min(5),
                 Validators.max(1000000),
                 Validators.required]),
-            signatureCount: new FormControl(0, [
-                Validators.min(0),
-                Validators.max(0)]),
-            author: new FormControl(this.userService.actualUser, [Validators.required]),
+            signatureCount: new FormControl(1, [
+                Validators.min(1)]),
+            author: new FormControl(this.userService.actualUser?.name, [Validators.required]),
         })
     }
 
@@ -68,35 +69,32 @@ export class CreatePetitionComponent {
 
     public onCheckChange(event) {
         // add or remove tag from selectedTags variable
-        if (event.target.checked)
-            this.selectedTags.push(event.target.value)
-        else {
-            let i: number = 0;
-            this.selectedTags.forEach((item) => {
-                if (item == event.target.value) {
-                    this.selectedTags.splice(i, 1)
-                    return;
-                }
-                i++;
-            })
+        if (event.target.checked) {
+            this.selectedTags.push({ name: event.target.value });
+        } else {
+            const index = this.selectedTags.findIndex(tag => tag.name === event.target.value);
+            if (index !== -1)
+                this.selectedTags.splice(index, 1);
         }
+
         // sync selectedTags with formTags
-        this.formTags.clear()
-        this.selectedTags.forEach(tag => this.formTags.push(new FormControl(tag)))
+        this.formTags.clear();
+        this.selectedTags.forEach(tag => this.formTags.push(new FormControl(tag)));
     }
 
 
     public createPetition() {
-        if (this.createPetitionForm.valid && !this.noTagSelected())
-            this.snack.alert("Fonctionnalité en cours de développement", 3000)
-
-        // this.uploadImage();
-        // if (this.createPetitionForm.valid && !this.noTagSelected()) {
-            // this.petitionService.createPetition(petitionData).subscribe({
-            //     next: petition => console.log(petition),
-            //     error: err => console.log(err)
-            // })
-        // }
+        let petitionData = this.createPetitionForm.value
+        if (this.createPetitionForm.valid && !this.noTagSelected()) {
+            this.addingPetition = true;
+            this.petitionService.createPetition(petitionData).subscribe({
+                next: petition => this.router.navigateByUrl('/mypetitions'),
+                error: err => {
+                    this.snack.alert(err.message, 3000)
+                    this.addingPetition = false;
+                }
+            })
+        }
         else this.snack.alert("Formulaire invalide. Veuillez vérifier les champs.", 3000)
     }
 
@@ -121,14 +119,11 @@ export class CreatePetitionComponent {
         this.selectedImage = event.target.files[0];
         if (!this.selectedImage) return;
         const reader = new FileReader();
-        reader.onload = () => this.imagePreview = reader.result as string;
         reader.readAsDataURL(this.selectedImage);
-    }
-
-    uploadImage() {
-        if (this.selectedImage && this.selectedImage.size < 10000000) {
-            this.snack.alert("Fonctionnalité en cours de développement", 3000)
-        } else this.snack.alert("No image selected or image too big", 3000)
+        reader.onload = () => {
+            this.createPetitionForm.patchValue({image: reader.result})
+            this.imagePreview = reader.result as string;
+        }
     }
 
     public nextStep() {
@@ -142,5 +137,9 @@ export class CreatePetitionComponent {
 
     public noTagSelected() {
         return this.selectedTags.length == 0;
+    }
+
+    test() {
+        console.log(this.createPetitionForm.value)
     }
 }

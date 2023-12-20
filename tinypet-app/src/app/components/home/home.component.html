@@ -6,9 +6,7 @@
         <br>
         <h3> Deja 92 {{count}} signatures des citoyens engagés</h3>
         <br>
-        <button class="ui inverted big button">
-            Lancez votre pétition
-        </button>
+        <a routerLink="/create" class="ui inverted big button">Lancez votre pétition</a>
     </div>
 </div>
 <br>
@@ -19,18 +17,18 @@
         <h1 class="title">Pétitions réussies</h1>
 
         <div class="ui three column grid">
-            <div class="column" *ngFor="let pet of items">
-                <div class="ui card">
+            <div class="column" *ngFor="let pet of victoires.slice(0, 3)">
+                <div class="ui card" [style.height]="'450px'">
                     <div class="image">
-                        <img src='{{pet.image}}'>
+                        <img [style.height]="'180px'" src='{{pet.image}}'>
                     </div>
                     <div class="content">
-                        <a class="header">{{pet.title}}</a>
+                        <a routerLink="petition/{{pet.id}}" class="header">{{pet.title}}</a>
                         <div class="meta">
-                            <span class="date"><i class="user icon"></i>{{pet.author.name}}</span>
+                            <span class="date"><i class="user icon"></i>{{pet.author}}</span>
                         </div>
                         <div class="description">
-                            {{pet.description | slice:0:100}} ...
+                            {{pet.description | slice:0:140}} ...
                         </div>
                     </div>
                     <div class="extra content">
@@ -55,30 +53,30 @@
        <h3 class="subtitle">- PETITIONS -</h3>
        <h1 class="title">Récemment lancées</h1>
        <div class="ui three column grid">
-           <div class="column" *ngFor="let pet of items">
-               <div class="ui card">
+           <div class="column" *ngFor="let pet of petitions.slice(0,3)">
+               <div class="ui card" [style.height]="'450px'">
                    <div class="image">
-                       <img src='{{pet.image}}'>
+                       <img [style.height]="'180px'" src='{{pet.image}}'>
                    </div>
                    <div class="content">
-                       <a class="header">{{pet.title}}</a>
+                       <a routerLink="petition/{{pet.id}}" class="header">{{pet.title}}</a>
                        <div class="meta">
-                           <span class="date"><i class="user icon"></i>{{pet.author.name}}</span>
+                           <span class="date"><i class="user icon"></i>{{pet.author}}</span>
                        </div>
                        <div class="description">
-                        {{pet.description | slice:0:100}} ...
+                        {{pet.description | slice:0:140}} ...
                        </div>
                    </div>
                    <div class="extra content">
                        <span>{{pet.signatureCount}}</span> signatures
                    </div>
-                   <button class="ui blue button">Je signe</button>
+                   <a routerLink="/petition/{{pet.id}}" class="ui blue button">Je signe</a>
                </div>
            </div>
        </div>
        <br>
        <div>
-           <button class="ui big button">Parcourir les petitions</button>
+           <a routerLink="/petitions" class="ui big button">Parcourir les petitions</a>
        </div>
    </div>
 </div>
