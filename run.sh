@@ -14,6 +14,7 @@ popd || exit
 
 # Run Angular build
 pushd tinypet-app || exit
+npm i -g @angular/cli
 ng build || exit
 popd || exit
 
