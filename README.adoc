@@ -2,6 +2,15 @@
 
 Projet Cloud ALMA 2023/2024
 
+== Membre
+|===
+| NOM  | PRENOM
+
+| DERGAOUI | Yassine
+| BARRY | Saikou yaya
+| AIT YACOUB | Anis
+|===
+
 This guide outlines the necessary steps to run and deploy the application. Please ensure all instructions are followed for the application to function properly.
 
 == Prerequisites
