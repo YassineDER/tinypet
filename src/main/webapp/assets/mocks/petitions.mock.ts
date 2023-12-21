@@ -4,11 +4,11 @@ export const PETITIONS: Petition[] = [
     {
         id: 1,
         title: 'Help find Madeleine McCann',
-        image: '/assets/images/Logo.png',
+        image: 'https://w0.peakpx.com/wallpaper/740/727/HD-wallpaper-r-d-r-2-view-ultra-games-red-dead-redemption-game-reddeadredemption-reddeadredemption2-view.jpg',
         description: 'Madeleine Beth McCann (born 12 May 2003) disappeared on the evening of 3 May 2007 from her bed in a holiday apartment ',
         creationDate: new Date('2019-06-01'),
         tags: [],
-        signatureCount: 3,
+        signatureCount: 702,
         signatureGoal: 1000,
         author: 'John Doe',
     },

@@ -4,6 +4,7 @@ import {PETITIONS} from 'src/assets/mocks/petitions.mock';
 import {Petition} from '../models/petition';
 import {HttpClient} from "@angular/common/http";
 import {prod} from "../../environments/environment";
+import {User} from "../models/user";
 
 @Injectable({
     providedIn: 'root'
@@ -26,14 +27,14 @@ export class PetitionService {
     }
 
     getMyPetitions(name: string | undefined): Observable<Petition[]> {
-        return this.http.get<Petition[]>(this.API + "/mine?user=" + name);
+        return this.http.get<Petition[]>(this.API + "/of?user=" + name);
     }
 
     getPetitionById(id: string): Observable<Petition> {
         return this.http.get<Petition>(this.API + "/get?id=" + id);
     }
 
-    updatePetition(petition: Petition): Observable<Petition> {
+    updatePetition(petition: Petition): Observable<Petition>{
         return this.http.put<Petition>(this.API + "/sign", petition);
     }
 

@@ -39,6 +39,23 @@ public class UserApiService {
         return pq.asList(FetchOptions.Builder.withLimit(20));
     }
 
+    @ApiMethod(name = "updateUser", path = "update", httpMethod = ApiMethod.HttpMethod.PUT)
+    public Entity updateUser(User user) {
+        Query q = new Query("User");
+        q.setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, user.getId()));
+        PreparedQuery pq = datastore.prepare(q);
+        Entity userEntity = pq.asSingleEntity();
+        userEntity.setProperty("name", user.getName());
+        userEntity.setProperty("email", user.getEmail());
+        userEntity.setProperty("createdPetitions", user.getCreatedPetitions());
+        userEntity.setProperty("signedPetitions", user.getSignedPetitions());
+        userEntity.setProperty("image", user.getImage());
+        Transaction t = datastore.beginTransaction();
+        datastore.put(userEntity);
+        t.commit();
+        return userEntity;
+    }
+
 
     @ApiMethod(name = "validateToken", path = "validate-token", httpMethod = ApiMethod.HttpMethod.POST)
     public Entity validateAndRegisterUser(@Named("token") String token) {

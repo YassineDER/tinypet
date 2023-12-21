@@ -15,7 +15,8 @@
     <div class="twelve wide column">
         <h3 class="subtitle">- VICTOIRES -</h3>
         <h1 class="title">Pétitions réussies</h1>
-
+        <div *ngIf="victoires.length == 0" class="ui active centered inline loader"></div>
+        <br>
         <div class="ui three column grid">
             <div class="column" *ngFor="let pet of victoires.slice(0, 3)">
                 <div class="ui card" [style.height]="'450px'">
@@ -52,6 +53,8 @@
    <div class="twelve wide column">
        <h3 class="subtitle">- PETITIONS -</h3>
        <h1 class="title">Récemment lancées</h1>
+       <div *ngIf="petitions.length == 0" class="ui active centered inline loader"></div>
+       <br>
        <div class="ui three column grid">
            <div class="column" *ngFor="let pet of petitions.slice(0,3)">
                <div class="ui card" [style.height]="'450px'">

@@ -1,1 +1,80 @@
-<p>petitions-list works!</p>
+<p></p>
+<h1 class="ui huge center aligned header" style="margin-left: 12px;">Découvrir des pétitions pour signer </h1>
+<br>
+<div class="ui grid container">
+    <!--    Filtres-->
+    <div class="ui four wide column">
+        <div class="ui raised segment">
+            <div class="ui action input">
+                <input type="text" placeholder="Rechercher une petition..."/>
+                <button class="ui icon button">
+                    <i class="search icon"></i>
+                </button>
+            </div>
+            <br><br>
+
+            <span class="ui header">
+                Trié par: <br>
+              <div class="ui inline dropdown">
+                <div class="text">Date de publication</div>
+                <i class="dropdown icon"></i>
+                <div class="menu">
+                  <div class="item">Nombre de signatures</div>
+                  <div class="item">Ordre alphabétique</div>
+                </div>
+              </div>
+            </span>
+
+            <br><br>
+            <div class="ui divider"></div>
+
+            <div class="header ui">Par tag:</div>
+            <div class="ui clearable multiple selection dropdown">
+                <input type="hidden" name="tags">
+                <i class="dropdown icon"></i>
+                <div class="default text">Selectionner les tags</div>
+                <div class="menu">
+                    <div *ngFor="let t of tags" class="item">{{t.name}}</div>
+                </div>
+            </div>
+
+            <br><br>
+            <button type="button" (click)="applyFilters()" class="ui primary button">Appliquer</button>
+        </div>
+
+    </div>
+
+    <!--    Liste des pétitions-->
+    <div class="ui twelve wide column">
+        <div class="ui segment raised">
+            <div class="ui link cards">
+                <div *ngIf="petitions.length == 0" class="ui active centered inline loader"></div>
+                <div routerLink="/petition/{{pet.id}}" class="card" *ngFor="let pet of petitions" [style.height]="'420px'" [style.width]="'260px'">
+                    <div class="image">
+                        <img [style.height]="'180px'" src="{{pet.image}}">
+                    </div>
+                    <div class="content">
+                        <div class="header">{{pet.title}}</div>
+                        <div class="meta">
+                            <i class="user icon"></i> {{pet.author}}
+                        </div>
+                        <div class="description">{{pet.description.slice(0, 130)}}...</div>
+                    </div>
+                    <div class="extra content">
+                      <span class="right floated">
+                        <i class="pen icon"></i>
+                          {{pet.signatureCount}}
+                      </span>
+                        <span>
+                        <i class="calendar icon"></i>
+                            {{pet.creationDate.toLocaleDateString()}}
+                      </span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>
+

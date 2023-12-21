@@ -16,6 +16,7 @@ import { SplashScreenComponent } from './components/splash-screen/splash-screen.
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {MatSliderModule} from "@angular/material/slider";
 import {PetitionComponent} from "./components/petition/petition.component";
+import {MatProgressBarModule} from "@angular/material/progress-bar";
 
 @NgModule({
   declarations: [
@@ -36,7 +37,8 @@ import {PetitionComponent} from "./components/petition/petition.component";
         BrowserAnimationsModule,
         FormsModule,
         ReactiveFormsModule,
-        MatSliderModule
+        MatSliderModule,
+        MatProgressBarModule
     ],
   providers: [
     SplashScreenStateService,

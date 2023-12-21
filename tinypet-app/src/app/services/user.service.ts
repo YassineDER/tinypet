@@ -19,6 +19,10 @@ export class UserService {
         return this.http.post<User>(this.API + '/validate-token', {token});
     }
 
+    updateUser(user: User): Observable<User> {
+        return this.http.put<User>(this.API + '/update', user);
+    }
+
     convertEntityToUser(E: any) :User {
       let entity = E.properties;
         return {

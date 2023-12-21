@@ -69,4 +69,38 @@ public class Petition {
     public String getAuthor() {
         return author;
     }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setImage(Text image) {
+        this.image = image;
+    }
+
+    public void setCreationDate(Date creationDate) {
+        this.creationDate = creationDate;
+    }
+
+    public void setTags(List<Tag> tags) {
+        this.tags = tags;
+    }
+
+    public void setSignatureCount(Integer signatureCount) {
+        this.signatureCount = signatureCount;
+    }
+
+    public void setSignatureGoal(Integer signatureGoal) {
+        this.signatureGoal = signatureGoal;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
+
+

@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, isDevMode, OnInit} from '@angular/core';
 import {Petition} from "../../models/petition";
 import {ActivatedRoute, Router} from "@angular/router";
 import {PetitionService} from "../../services/petition.service";
 import {SnackBarService} from "../../services/snack-bar.service";
+import {PETITIONS} from "../../../assets/mocks/petitions.mock";
+import {User} from "../../models/user";
+import {UserService} from "../../services/user.service";
 
 @Component({
   selector: 'app-petition',
@@ -11,10 +14,12 @@ import {SnackBarService} from "../../services/snack-bar.service";
 })
 export class PetitionComponent implements OnInit{
     pet? : Petition;
+    signed : boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private snack: SnackBarService,
+                private userService: UserService,
                 private petitionService: PetitionService) {
     }
 
@@ -22,14 +27,38 @@ export class PetitionComponent implements OnInit{
         const id = this.route.snapshot.paramMap.get('id');
         if (id) {
             this.petitionService.getPetitionById(id).subscribe({
-                next: (pet) => this.pet = pet,
-                error: (err) => this.router.navigateByUrl('/')
-                    .then(() => this.snack.alert('Petition not found', 3000))
+                next: (pet) => {
+                    if (pet) this.pet = pet;
+                    else this.router.navigateByUrl('/')
+                        .then(() => this.snack.alert('Petition not found', 3000))
+                    },
+                error: (err) => this.router.navigateByUrl('/').then(() => console.error(err))
             })
         } else this.router.navigateByUrl('/')
                 .then(() => this.snack.alert('Invalid petition id', 3000))
 
     }
 
+    formatDate(date: Date) {
+        return new Date(date).toLocaleDateString();
+    }
 
+
+    signPet(pet: Petition | undefined) {
+        this.snack.alert('Fonctionnalité en cours de développement', 2000);
+        // if (pet && this.userService.actualUser && !isDevMode()) {
+        //     this.petitionService.updatePetition(pet.id, this.userService.actualUser.id).subscribe({
+        //         next: (user) => {
+        //             try {
+        //                 this.userService.actualUser!!.signedPetitions.push(pet);
+        //                 this.userService.updateUser(this.userService.actualUser!!);
+        //                 this.snack.alert('Petition signed', 3000);
+        //             } catch (e) {
+        //                 console.error(e);
+        //             }
+        //         },
+        //         error: (err) => this.snack.alert('Error signing petition', 3000)
+        //     })
+        // }
+    }
 }

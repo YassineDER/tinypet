@@ -61,6 +61,12 @@ public class User {
         this.id = id;
     }
 
+    public User signPetition(Petition petition) {
+        this.signedPetitions.add(petition);
+        petition.setSignatureCount(petition.getSignatureCount() + 1);
+        return this;
+    }
+
     public void setName(String name) {
         this.name = name;
     }

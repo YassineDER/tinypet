@@ -5,3 +5,9 @@ indexes:
       direction: desc
     - name: signatureCount
       direction: asc
+- kind: Petition
+  properties:
+    - name: author
+    - name: creationDate
+      direction: desc
+

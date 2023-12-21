@@ -2,6 +2,7 @@ package com.example.echo.services;
 
 import com.example.echo.models.Petition;
 import com.example.echo.models.Tag;
+import com.example.echo.models.User;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.*;
@@ -42,27 +43,29 @@ public class PetitionApiService {
         return p;
     }
 
-    @ApiMethod(name = "myPetitions", path = "mine", httpMethod = HttpMethod.GET)
+    @ApiMethod(name = "myPetitions", path = "of", httpMethod = HttpMethod.GET)
     public List<Entity> getPetitions(@Named("user") String user) {
         Query q = new Query("Petition").addSort("creationDate", Query.SortDirection.DESCENDING);
         q.setFilter(new Query.FilterPredicate("author", Query.FilterOperator.EQUAL, user));
         return datastore.prepare(q).asList(FetchOptions.Builder.withLimit(10));
     }
 
+
     @ApiMethod(name = "getPetition", path = "get", httpMethod = HttpMethod.GET)
-    public Entity getPetition(@Named("id") String id) {
+    public Entity getPetition(@Named("id") long id) {
         Query q = new Query("Petition");
         q.setFilter(new Query.FilterPredicate("id", Query.FilterOperator.EQUAL, id));
         return datastore.prepare(q).asSingleEntity();
     }
 
     @ApiMethod(name = "SignPetition", path = "sign", httpMethod = HttpMethod.PUT)
-    public void signPetition(Petition petition) {
+    public Entity signPetition(Petition petition) {
         Transaction t = datastore.beginTransaction();
-        Entity p = getPetition(petition.getId().toString());
-        p.setProperty("signatureCount", petition.getSignatureCount());
+        Entity p = getPetition(petition.getId());
+        p.setProperty("signatureCount", (long) p.getProperty("signatureCount") + 1);
         datastore.put(p);
         t.commit();
+        return p;
     }
 
     // must be called with a page parameter (e.g. /api/petitions/all?page=1)

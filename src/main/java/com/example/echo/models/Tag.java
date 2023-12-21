@@ -17,9 +17,8 @@ public class Tag {
 
     @Override
     public boolean equals(Object obj) {
-        if (!(obj instanceof Tag other))
-            return false;
-        return this.name.trim().equalsIgnoreCase(other.name.trim());
+        if (obj == null || obj.getClass() != this.getClass()) return false;
+        return this.name.trim().equalsIgnoreCase(((Tag) obj).name.trim());
     }
 
     @Override

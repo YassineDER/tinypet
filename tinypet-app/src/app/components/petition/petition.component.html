@@ -1,3 +1,53 @@
-<!--<p>{{pet.name}}</p>-->
-<p>Hiiiii</p>
-<br><br><br><br>
+<p></p>
+<h2 class="ui center blue aligned header">{{pet?.title}}</h2>
+<br>
+<div class="ui grid container">
+    <div class="ten wide column centered">
+        <div class="ui card fluid">
+            <img class="ui fluid image" src="{{pet?.image}}">
+            <div class="content">
+                <div class="meta"><b>Lancée le :</b> {{formatDate(pet!!.creationDate)}}</div>
+                <div class="meta"><b>Adressée à :</b> Pascal MOLLI (j'espere que ca scale)</div>
+            </div>
+        </div>
+
+        <div class="ui segment">
+            <h3>Pourquoi cette pétition est importante ?</h3>
+            <p>{{pet?.description}}</p>
+        </div>
+
+    </div>
+
+    <div class="five wide column">
+        <div class="ui segment center aligned">
+            <mat-progress-bar mode="determinate" value="{{(pet!!.signatureCount / pet!!.signatureGoal) * 100}}"></mat-progress-bar>
+            <div class="ui aligned grid statistics">
+                <div class="left floated right aligned six wide column">
+                    <div class="ui small statistic">
+                        <div class="value">{{pet?.signatureCount}}</div>
+                        <div class="label">Signatures</div>
+                    </div>
+                </div>
+                <div class="right floated left aligned six wide column">
+                    <div class="ui statistic small">
+                        <div class="value">{{pet?.signatureGoal}}</div>
+                        <div class="label">Objectif</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ui divider"></div>
+            <div>
+                <i class="ui avatar user icon"></i>
+                <span>Lancée par <b>{{pet?.author}}</b></span>
+                <br>
+            </div>
+            <br>
+
+            <button [disabled]="signed" (click)="signPet(pet)" type="button" class="ui button inverted blue large">
+                Signer cette petition</button>
+
+        </div>
+
+    </div>
+</div>
