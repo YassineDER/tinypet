@@ -5,31 +5,31 @@ Projet Cloud ALMA 2023/2024
 This guide outlines the necessary steps to run and deploy the application. Please ensure all instructions are followed for the application to function properly.
 
 == Prerequisites
-* Java 17 installed (Due to Google ending support for Java 8).
+* Java 11 installed (Due to Google ending support for Java 8).
 * Google Cloud SDK (gcloud) installed, authenticated, and configured with your project.
 * Necessary APIs enabled in the Google Cloud Console (Google +, Endpoints, Datastore API...).
 * Relevant gcloud services and components installed on your local machine.
 
-== Configuration Steps
+== Personnal Configuration Steps
 
 . *Changing the Project ID in pom.xml*:
   - Update the `<projectID>` in `pom.xml` to your Google Cloud Project ID.
 
 . *Installing Required Npm Dependencies*:
   - run `npm i` inside the tinypey-app folder to install all required dependencies for the building.
-  - run `npm i -g @angular/cli` to install Angular NG globaly
   - For maven dependencies, no need as the commands bellow do the work.
 
 == Running / Deploying the application
 
+
 . *Locally*:
   - For Windows, use `run.bat`.
-  - For Unix-based systems, use `run.sh`.
+  - For Unix-based systems, use `run.sh`. (``chmod +x run.sh`` before first execution)
 
-. *To Google App Engine*:
+. *To App Engine Cloud Console*:
   - For Windows, use `deploy.bat`.
-  - For Unix-based systems, use `deploy.sh`.
+  - For Unix-based systems, use `deploy.sh` (``chmod +x deploy.sh`` before first execution)
 
 == Important Notes
-- Ensure Java 17 is used, as the project is not compatible with Java 8 or neither Java 11.
+- Ensure Java 11 is used, as the project is not compatible with Java 8.
 - Failure to follow these instructions may result in the application not working correctly.

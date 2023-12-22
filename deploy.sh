@@ -7,7 +7,8 @@ find . -mindepth 1 ! -regex '^./WEB-INF\(/.*\)?' -delete || exit
 popd || exit
 
 pushd tinypet-app || exit
-ng build || exit
+npm install
+npm run build || exit
 popd || exit
 
 mvn clean install || exit
