@@ -20,8 +20,9 @@ export class HomeComponent implements OnInit {
             this.victoires = this.petitonsService.convertEntityListToPetitions(petitions)
                 .filter(petition => petition.signatureCount == petition.signatureGoal));
 
-        this.petitonsService.getPetitions().subscribe(petitions =>
+        this.petitonsService.getPetitions(3).subscribe(petitions =>
             this.petitions = this.petitonsService.convertEntityListToPetitions(petitions)
+                .filter(petition => petition.signatureCount !== petition.signatureGoal)
                 .sort((a, b) => 0.5 - Math.random()).slice(0, 3))
 
 

@@ -14,12 +14,11 @@ import {UserService} from "../../services/user.service";
 })
 export class PetitionComponent implements OnInit{
     pet? : Petition;
-    signed : boolean = false;
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
                 private snack: SnackBarService,
-                private userService: UserService,
+                public userService: UserService,
                 private petitionService: PetitionService) {
     }
 
@@ -28,7 +27,8 @@ export class PetitionComponent implements OnInit{
         if (id) {
             this.petitionService.getPetitionById(id).subscribe({
                 next: (pet) => {
-                    if (pet) this.pet = pet;
+                    if (pet)
+                        this.pet = this.petitionService.convertEntityToPetition(pet)
                     else this.router.navigateByUrl('/')
                         .then(() => this.snack.alert('Petition not found', 3000))
                     },
@@ -39,12 +39,15 @@ export class PetitionComponent implements OnInit{
 
     }
 
-    formatDate(date: Date) {
-        return new Date(date).toLocaleDateString();
+    formatDate(date: Date | undefined) {
+        return new Date(date!!).toLocaleDateString();
     }
 
 
     signPet(pet: Petition | undefined) {
+        if (pet?.author === this.userService.actualUser?.name) {
+            return this.snack.alert('You cannot sign your own petition', 3000);
+        }
         this.snack.alert('Fonctionnalité en cours de développement', 2000);
         // if (pet && this.userService.actualUser && !isDevMode()) {
         //     this.petitionService.updatePetition(pet.id, this.userService.actualUser.id).subscribe({

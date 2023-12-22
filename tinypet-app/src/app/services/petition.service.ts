@@ -22,8 +22,8 @@ export class PetitionService {
         return this.http.post<Petition>(this.API + "/create", petition);
     }
 
-    getPetitions(): Observable<Petition[]> {
-        return this.http.get<Petition[]>(this.API + "/all?page=1");
+    getPetitions(limit = 10): Observable<Petition[]> {
+        return this.http.get<Petition[]>(this.API + "/all?limit=" + limit);
     }
 
     getMyPetitions(name: string | undefined): Observable<Petition[]> {
@@ -60,6 +60,23 @@ export class PetitionService {
             })
         }
         return petitions;
+    }
+
+    convertEntityToPetition(entity: any): Petition {
+        const petition: Petition = {
+            id: entity.properties.id,
+            title: entity.properties.title,
+            description: entity.properties.description,
+            signatureGoal: parseInt(entity.properties.signatureGoal, 10),
+            creationDate: new Date(entity.properties.creationDate),
+            tags: entity.properties.tags.map((tag: any) => ({
+                name: tag.properties.name
+            })),
+            author: entity.properties.author,
+            signatureCount: parseInt(entity.properties.signatureCount, 10),
+            image: entity.properties.image.value,
+        }
+        return petition;
     }
 
 }

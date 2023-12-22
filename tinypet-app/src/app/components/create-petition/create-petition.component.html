@@ -50,7 +50,7 @@
         <h1>Quel est le titre de votre pétition ?</h1>
         <p>C'est la première chose que les gens verront à propos votre pétition.</p>
         <div class="ui input focus">
-            <input required minlength="4" type="text" maxlength="90" formControlName="title" placeholder="Augmenter le SMIC vers 2000€...">
+            <input required minlength="8" type="text" maxlength="40" formControlName="title" placeholder="Augmenter le SMIC vers 2000€...">
         </div>
         <div *ngIf="title?.invalid" class="ui pointing red large label">Titre trop court / invalide</div>
         <br>
@@ -94,8 +94,8 @@
 
     <div class="controls">
         <button type="button" *ngIf="step > 1" class="ui button large black" (click)="prevStep()">Etape précèdente</button>
-        <button type="button" *ngIf="(step !== maxStep)" [disabled]="noTagSelected()" class="ui button large blue" (click)="nextStep()">Etape suivante</button>
-        <button type="submit" *ngIf="step == maxStep" class="ui button large green" [disabled]="addingPetition">Publier</button>
+        <button type="button" *ngIf="(step !== 4)" [disabled]="noTagSelected()" class="ui button large blue" (click)="nextStep()">Etape suivante</button>
+        <button type="submit" *ngIf="step == 4" class="ui button large green" [disabled]="addingPetition">Publier</button>
     </div>
 </form>
 

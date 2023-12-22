@@ -70,13 +70,11 @@ public class PetitionApiService {
 
     // must be called with a page parameter (e.g. /api/petitions/all?page=1)
     @ApiMethod(name = "allPetitions", path = "all", httpMethod = HttpMethod.GET)
-    public List<Entity> getAllPetitions(@Named("page") int page) {
-        final int pageSize = 10;
-        int offset = (page - 1) * pageSize;
+    public List<Entity> getAllPetitions(@Named("limit") int limit) {
         Query q = new Query("Petition").addSort("creationDate", Query.SortDirection.DESCENDING)
                 .addSort("signatureCount", Query.SortDirection.ASCENDING);
         PreparedQuery pq = datastore.prepare(q);
-        return pq.asList(FetchOptions.Builder.withLimit(pageSize).offset(offset));
+        return pq.asList(FetchOptions.Builder.withLimit(limit));
     }
 
 }

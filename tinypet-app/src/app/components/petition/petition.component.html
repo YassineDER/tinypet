@@ -4,9 +4,9 @@
 <div class="ui grid container">
     <div class="ten wide column centered">
         <div class="ui card fluid">
-            <img class="ui fluid image" src="{{pet?.image}}">
+            <img class="ui fluid image" [style.height]="'450px'" src="{{pet?.image}}">
             <div class="content">
-                <div class="meta"><b>Lancée le :</b> {{formatDate(pet!!.creationDate)}}</div>
+                <div class="meta"><b>Lancée le :</b> {{pet?.creationDate}}</div>
                 <div class="meta"><b>Adressée à :</b> Pascal MOLLI (j'espere que ca scale)</div>
             </div>
         </div>
@@ -20,7 +20,7 @@
 
     <div class="five wide column">
         <div class="ui segment center aligned">
-            <mat-progress-bar mode="determinate" value="{{(pet!!.signatureCount / pet!!.signatureGoal) * 100}}"></mat-progress-bar>
+            <mat-progress-bar *ngIf="pet" mode="determinate" value="{{(pet.signatureCount / pet.signatureGoal) * 100}}"></mat-progress-bar>
             <div class="ui aligned grid statistics">
                 <div class="left floated right aligned six wide column">
                     <div class="ui small statistic">
@@ -44,7 +44,7 @@
             </div>
             <br>
 
-            <button [disabled]="signed" (click)="signPet(pet)" type="button" class="ui button inverted blue large">
+            <button *ngIf="(pet?.signatureCount !== pet?.signatureGoal)" (click)="signPet(pet)" type="button" class="ui button inverted blue large">
                 Signer cette petition</button>
 
         </div>

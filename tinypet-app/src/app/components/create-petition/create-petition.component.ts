@@ -17,7 +17,6 @@ declare var $: any; // jquery
 
 export class CreatePetitionComponent {
     step = 1;
-    maxStep = 4;
     tags: Tag[] = [];
     addingPetition: boolean = false;
     createPetitionForm: FormGroup;
@@ -34,13 +33,13 @@ export class CreatePetitionComponent {
             tags: new FormArray([], [Validators.minLength(1), Validators.required]),
             title: new FormControl('', [
                 Validators.minLength(8),
-                Validators.maxLength(90),
+                Validators.maxLength(40),
                 Validators.required]),
             description: new FormControl('', [
                 Validators.minLength(8),
                 Validators.maxLength(600),
                 Validators.required]),
-            image: new FormControl('https://dummyimage.com/500x300/cccccc/fff.png&text=+'),
+            image: new FormControl('https://dummyimage.com/500x300/cccccc/fff.png&text=Image+non+disponible', [Validators.required]),
             creationDate: new FormControl(new Date()),
             signatureGoal: new FormControl(50, [
                 Validators.min(5),
@@ -127,7 +126,7 @@ export class CreatePetitionComponent {
     }
 
     public nextStep() {
-        if (this.step < this.maxStep)
+        if (this.step < 4)
             this.step++;
     }
     public prevStep() {
