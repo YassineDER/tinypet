@@ -7,6 +7,7 @@ import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiMethod.*;
 import com.google.api.server.spi.config.Named;
+import com.google.api.server.spi.config.Nullable;
 import com.google.appengine.api.datastore.*;
 
 import java.util.ArrayList;
@@ -70,11 +71,11 @@ public class PetitionApiService {
 
     // must be called with a page parameter (e.g. /api/petitions/all?page=1)
     @ApiMethod(name = "allPetitions", path = "all", httpMethod = HttpMethod.GET)
-    public List<Entity> getAllPetitions(@Named("limit") int limit) {
+    public List<Entity> getAllPetitions(@Named("limit") int limit, @Named("name") @Nullable String name) {
         Query q = new Query("Petition").addSort("creationDate", Query.SortDirection.DESCENDING)
                 .addSort("signatureCount", Query.SortDirection.ASCENDING);
-        PreparedQuery pq = datastore.prepare(q);
-        return pq.asList(FetchOptions.Builder.withLimit(limit));
+        if (name != null)
+            q.setFilter(new Query.FilterPredicate("title", Query.FilterOperator.GREATER_THAN_OR_EQUAL, name));
+        return datastore.prepare(q).asList(FetchOptions.Builder.withLimit(limit));
     }
-
 }

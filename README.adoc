@@ -18,6 +18,18 @@ The application is composed of two main parts:
 - The backend, which is a Java application using the JEE Servlet API, and is deployed on Google App Engine.
 - The frontend, which is an Angular application, and is deployed on the same App Engine instance as the backend.
 
+== Kinds in Datastore
+
+image::../kinds.PNG[]
+
+== API Endpoints
+
+image::../endpoints.PNG[]
+
+== Indexes in Datastore
+
+image::../indexes.PNG[]
+
 
 == Known Issues
 - When refreshing the page, the application will return a 404 not found error. This is due to the application being a single page application, and the server not being configured to handle this. The routes will still work as expected.
