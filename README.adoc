@@ -20,15 +20,15 @@ The application is composed of two main parts:
 
 == Kinds in Datastore
 
-image::../kinds.PNG[]
+image::./tinypet-app/src/assets/images/kinds.PNG[]
 
 == API Endpoints
 
-image::../endpoints.PNG[]
+image::./tinypet-app/src/assets/images/endpoints.PNG[]
 
 == Indexes in Datastore
 
-image::../indexes.PNG[]
+image::./tinypet-app/src/assets/images/indexes.PNG[]
 
 
 == Known Issues
