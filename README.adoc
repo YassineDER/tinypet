@@ -4,7 +4,7 @@ Projet Cloud ALMA 2023/2024
 
 This guide outlines the necessary steps to run and deploy the application. Please ensure all instructions are followed for the application to function properly.
 
-
+image::./tinypet-app/src/assets/images/MainPage.png[]
 
 == Architecture
 The application is composed of two main parts:
